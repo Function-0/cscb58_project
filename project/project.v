@@ -95,16 +95,17 @@ module datapath(clock, resetn, attempts,jump, init, playing, dead);
 		else begin
 			if (init)
 				begin
-					counter <= 25'b1011111010111100000111111; // 24,999,999
+					counter <= 25'b1011111010111100000111111; // 24,999,999 (placeholder value)
 					height <= 3'b000;
 					killed <= 1'b0;
 					jump_pressed <= 1'b0;
 				end
 			else if(playing)
-				
+				// this is where we calculate the player's position and collision detection
 			else if(killed)
 				begin
-					killed <= 0;
+					killed <= 0;// will add more as we build the game
+				end
 					
 				
 			
