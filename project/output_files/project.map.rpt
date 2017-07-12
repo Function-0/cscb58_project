@@ -1,5 +1,5 @@
 Analysis & Synthesis report for project
-Fri Jul 07 20:46:01 2017
+Tue Jul 11 12:55:47 2017
 Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
 
 
@@ -14,24 +14,45 @@ Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
-  9. State Machine - |project|control:c0|current_state
+  9. User-Specified and Inferred Latches
  10. Registers Removed During Synthesis
- 11. General Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Source assignments for vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated
- 14. Parameter Settings for User Entity Instance: vga_adapter:VGA
- 15. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_address_translator:user_input_translator
- 16. Parameter Settings for User Entity Instance: vga_adapter:VGA|altsyncram:VideoMemory
- 17. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component
- 18. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_controller:controller
- 19. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_controller:controller|vga_address_translator:controller_translator
- 20. altsyncram Parameter Settings by Entity Instance
- 21. altpll Parameter Settings by Entity Instance
- 22. Port Connectivity Checks: "datapath:d0"
- 23. Post-Synthesis Netlist Statistics for Top Partition
- 24. Elapsed Time Per Partition
- 25. Analysis & Synthesis Messages
- 26. Analysis & Synthesis Suppressed Messages
+ 11. Removed Registers Triggering Further Register Optimizations
+ 12. General Register Statistics
+ 13. Inverted Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated
+ 16. Parameter Settings for User Entity Instance: vga_adapter:VGA
+ 17. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_address_translator:user_input_translator
+ 18. Parameter Settings for User Entity Instance: vga_adapter:VGA|altsyncram:VideoMemory
+ 19. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component
+ 20. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_controller:controller
+ 21. Parameter Settings for User Entity Instance: vga_adapter:VGA|vga_controller:controller|vga_address_translator:controller_translator
+ 22. altsyncram Parameter Settings by Entity Instance
+ 23. altpll Parameter Settings by Entity Instance
+ 24. Port Connectivity Checks: "control:main_control"
+ 25. Port Connectivity Checks: "shape:Spike_5"
+ 26. Port Connectivity Checks: "shape:Spike_4"
+ 27. Port Connectivity Checks: "shape:Spike_3"
+ 28. Port Connectivity Checks: "shape:Spike_2"
+ 29. Port Connectivity Checks: "shape:Spike_1"
+ 30. Port Connectivity Checks: "shape:Block_5"
+ 31. Port Connectivity Checks: "shape:Block_4"
+ 32. Port Connectivity Checks: "shape:Block_3"
+ 33. Port Connectivity Checks: "shape:Block_2"
+ 34. Port Connectivity Checks: "shape:Block_1"
+ 35. Port Connectivity Checks: "shape:Square_frame_7"
+ 36. Port Connectivity Checks: "shape:Square_frame_6"
+ 37. Port Connectivity Checks: "shape:Square_frame_5"
+ 38. Port Connectivity Checks: "shape:Square_frame_4"
+ 39. Port Connectivity Checks: "shape:Square_frame_3"
+ 40. Port Connectivity Checks: "shape:Square_frame_2"
+ 41. Port Connectivity Checks: "shape:Square_frame_1"
+ 42. Port Connectivity Checks: "clear_screen:black_screen"
+ 43. Port Connectivity Checks: "vga_adapter:VGA"
+ 44. Post-Synthesis Netlist Statistics for Top Partition
+ 45. Elapsed Time Per Partition
+ 46. Analysis & Synthesis Messages
+ 47. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -58,18 +79,18 @@ agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jul 07 20:46:01 2017       ;
+; Analysis & Synthesis Status        ; Successful - Tue Jul 11 12:55:47 2017       ;
 ; Quartus Prime Version              ; 17.0.0 Build 595 04/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; project                                     ;
 ; Top-level Entity Name              ; project                                     ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 187                                         ;
-;     Total combinational functions  ; 175                                         ;
-;     Dedicated logic registers      ; 87                                          ;
-; Total registers                    ; 87                                          ;
-; Total pins                         ; 50                                          ;
+; Total logic elements               ; 2,169                                       ;
+;     Total combinational functions  ; 2,138                                       ;
+;     Dedicated logic registers      ; 1,022                                       ;
+; Total registers                    ; 1022                                        ;
+; Total pins                         ; 79                                          ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 57,600                                      ;
+; Total memory bits                  ; 230,400                                     ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
 ; Total PLLs                         ; 1                                           ;
 +------------------------------------+---------------------------------------------+
@@ -174,75 +195,74 @@ agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.0%      ;
+;     Processor 2            ;   0.1%      ;
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                   ;
-+--------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path     ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                 ; Library ;
-+--------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------+---------+
-; vga_adapter/vga_pll.v                ; yes             ; User Wizard-Generated File             ; C:/Users/DAVID/Desktop/project/vga_adapter/vga_pll.v                         ;         ;
-; vga_adapter/vga_controller.v         ; yes             ; User Verilog HDL File                  ; C:/Users/DAVID/Desktop/project/vga_adapter/vga_controller.v                  ;         ;
-; vga_adapter/vga_address_translator.v ; yes             ; User Verilog HDL File                  ; C:/Users/DAVID/Desktop/project/vga_adapter/vga_address_translator.v          ;         ;
-; vga_adapter/vga_adapter.v            ; yes             ; User Verilog HDL File                  ; C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v                     ;         ;
-; project.v                            ; yes             ; User Verilog HDL File                  ; C:/Users/DAVID/Desktop/project/project.v                                     ;         ;
-; altsyncram.tdf                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
-; stratix_ram_block.inc                ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
-; lpm_mux.inc                          ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
-; lpm_decode.inc                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
-; aglobal170.inc                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/aglobal170.inc        ;         ;
-; a_rdenreg.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
-; altrom.inc                           ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altrom.inc            ;         ;
-; altram.inc                           ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altram.inc            ;         ;
-; altdpram.inc                         ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_60g1.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/Users/DAVID/Desktop/project/db/altsyncram_60g1.tdf                        ;         ;
-; black.mif                            ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/DAVID/Desktop/project/black.mif                                     ;         ;
-; db/decode_lsa.tdf                    ; yes             ; Auto-Generated Megafunction            ; C:/Users/DAVID/Desktop/project/db/decode_lsa.tdf                             ;         ;
-; db/decode_e8a.tdf                    ; yes             ; Auto-Generated Megafunction            ; C:/Users/DAVID/Desktop/project/db/decode_e8a.tdf                             ;         ;
-; db/mux_0nb.tdf                       ; yes             ; Auto-Generated Megafunction            ; C:/Users/DAVID/Desktop/project/db/mux_0nb.tdf                                ;         ;
-; altpll.tdf                           ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altpll.tdf            ;         ;
-; stratix_pll.inc                      ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/stratix_pll.inc       ;         ;
-; stratixii_pll.inc                    ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/stratixii_pll.inc     ;         ;
-; cycloneii_pll.inc                    ; yes             ; Megafunction                           ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/cycloneii_pll.inc     ;         ;
-+--------------------------------------+-----------------+----------------------------------------+------------------------------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                        ;
++--------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path     ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                ; Library ;
++--------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
+; vga_adapter/vga_pll.v                ; yes             ; User Wizard-Generated File   ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_pll.v                ;         ;
+; vga_adapter/vga_controller.v         ; yes             ; User Verilog HDL File        ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_controller.v         ;         ;
+; vga_adapter/vga_address_translator.v ; yes             ; User Verilog HDL File        ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_address_translator.v ;         ;
+; vga_adapter/vga_adapter.v            ; yes             ; User Verilog HDL File        ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v            ;         ;
+; project.v                            ; yes             ; User Verilog HDL File        ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v                            ;         ;
+; altsyncram.tdf                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf                       ;         ;
+; stratix_ram_block.inc                ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/stratix_ram_block.inc                ;         ;
+; lpm_mux.inc                          ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_mux.inc                          ;         ;
+; lpm_decode.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/lpm_decode.inc                       ;         ;
+; aglobal170.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/aglobal170.inc                       ;         ;
+; a_rdenreg.inc                        ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/a_rdenreg.inc                        ;         ;
+; altrom.inc                           ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altrom.inc                           ;         ;
+; altram.inc                           ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altram.inc                           ;         ;
+; altdpram.inc                         ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altdpram.inc                         ;         ;
+; db/altsyncram_vhg1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/altsyncram_vhg1.tdf               ;         ;
+; db/decode_5ua.tdf                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/decode_5ua.tdf                    ;         ;
+; db/decode_u9a.tdf                    ; yes             ; Auto-Generated Megafunction  ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/decode_u9a.tdf                    ;         ;
+; db/mux_gob.tdf                       ; yes             ; Auto-Generated Megafunction  ; C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/mux_gob.tdf                       ;         ;
+; altpll.tdf                           ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altpll.tdf                           ;         ;
+; stratix_pll.inc                      ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/stratix_pll.inc                      ;         ;
+; stratixii_pll.inc                    ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/stratixii_pll.inc                    ;         ;
+; cycloneii_pll.inc                    ; yes             ; Megafunction                 ; c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/cycloneii_pll.inc                    ;         ;
++--------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------------------------------+---------+
 
 
-+------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                ;
-+---------------------------------------------+--------------+
-; Resource                                    ; Usage        ;
-+---------------------------------------------+--------------+
-; Estimated Total logic elements              ; 187          ;
-;                                             ;              ;
-; Total combinational functions               ; 175          ;
-; Logic element usage by number of LUT inputs ;              ;
-;     -- 4 input functions                    ; 40           ;
-;     -- 3 input functions                    ; 41           ;
-;     -- <=2 input functions                  ; 94           ;
-;                                             ;              ;
-; Logic elements by mode                      ;              ;
-;     -- normal mode                          ; 80           ;
-;     -- arithmetic mode                      ; 95           ;
-;                                             ;              ;
-; Total registers                             ; 87           ;
-;     -- Dedicated logic registers            ; 87           ;
-;     -- I/O registers                        ; 0            ;
-;                                             ;              ;
-; I/O pins                                    ; 50           ;
-; Total memory bits                           ; 57600        ;
-;                                             ;              ;
-; Embedded Multiplier 9-bit elements          ; 0            ;
-;                                             ;              ;
-; Total PLLs                                  ; 1            ;
-;     -- PLLs                                 ; 1            ;
-;                                             ;              ;
-; Maximum fan-out node                        ; KEY[0]~input ;
-; Maximum fan-out                             ; 75           ;
-; Total fan-out                               ; 1130         ;
-; Average fan-out                             ; 3.04         ;
-+---------------------------------------------+--------------+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimated Total logic elements              ; 2,169          ;
+;                                             ;                ;
+; Total combinational functions               ; 2138           ;
+; Logic element usage by number of LUT inputs ;                ;
+;     -- 4 input functions                    ; 521            ;
+;     -- 3 input functions                    ; 765            ;
+;     -- <=2 input functions                  ; 852            ;
+;                                             ;                ;
+; Logic elements by mode                      ;                ;
+;     -- normal mode                          ; 1261           ;
+;     -- arithmetic mode                      ; 877            ;
+;                                             ;                ;
+; Total registers                             ; 1022           ;
+;     -- Dedicated logic registers            ; 1022           ;
+;     -- I/O registers                        ; 0              ;
+;                                             ;                ;
+; I/O pins                                    ; 79             ;
+; Total memory bits                           ; 230400         ;
+;                                             ;                ;
+; Embedded Multiplier 9-bit elements          ; 0              ;
+;                                             ;                ;
+; Total PLLs                                  ; 1              ;
+;     -- PLLs                                 ; 1              ;
+;                                             ;                ;
+; Maximum fan-out node                        ; CLOCK_50~input ;
+; Maximum fan-out                             ; 1019           ;
+; Total fan-out                               ; 9794           ;
+; Average fan-out                             ; 2.92           ;
++---------------------------------------------+----------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -250,57 +270,187 @@ agreement for further details.
 +---------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------+------------------------+--------------+
 ; Compilation Hierarchy Node                              ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                     ; Entity Name            ; Library Name ;
 +---------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------+------------------------+--------------+
-; |project                                                ; 175 (0)             ; 87 (0)                    ; 57600       ; 0            ; 0       ; 0         ; 50   ; 0            ; |project                                                                                                ; project                ; work         ;
-;    |control:c0|                                         ; 5 (5)               ; 4 (4)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|control:c0                                                                                     ; control                ; work         ;
-;    |datapath:d0|                                        ; 71 (71)             ; 53 (53)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|datapath:d0                                                                                    ; datapath               ; work         ;
-;    |vga_adapter:VGA|                                    ; 99 (3)              ; 30 (0)                    ; 57600       ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA                                                                                ; vga_adapter            ; work         ;
-;       |altsyncram:VideoMemory|                          ; 12 (0)              ; 4 (0)                     ; 57600       ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory                                                         ; altsyncram             ; work         ;
-;          |altsyncram_60g1:auto_generated|               ; 12 (0)              ; 4 (4)                     ; 57600       ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated                          ; altsyncram_60g1        ; work         ;
-;             |decode_e8a:rden_decode_b|                  ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|decode_e8a:rden_decode_b ; decode_e8a             ; work         ;
-;             |decode_lsa:decode2|                        ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|decode_lsa:decode2       ; decode_lsa             ; work         ;
-;             |mux_0nb:mux3|                              ; 6 (6)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|mux_0nb:mux3             ; mux_0nb                ; work         ;
-;       |vga_address_translator:user_input_translator|    ; 18 (18)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_address_translator:user_input_translator                                   ; vga_address_translator ; work         ;
-;       |vga_controller:controller|                       ; 66 (48)             ; 26 (26)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_controller:controller                                                      ; vga_controller         ; work         ;
-;          |vga_address_translator:controller_translator| ; 18 (18)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_controller:controller|vga_address_translator:controller_translator         ; vga_address_translator ; work         ;
+; |project                                                ; 2138 (1)            ; 1022 (0)                  ; 230400      ; 0            ; 0       ; 0         ; 79   ; 0            ; |project                                                                                                ; project                ; work         ;
+;    |clear_screen:black_screen|                          ; 78 (78)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|clear_screen:black_screen                                                                      ; clear_screen           ; work         ;
+;    |control:main_control|                               ; 361 (361)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|control:main_control                                                                           ; control                ; work         ;
+;    |frames_per_second_60:FPS|                           ; 52 (52)             ; 26 (26)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|frames_per_second_60:FPS                                                                       ; frames_per_second_60   ; work         ;
+;    |shape:Block_1|                                      ; 90 (90)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Block_1                                                                                  ; shape                  ; work         ;
+;    |shape:Block_2|                                      ; 95 (95)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Block_2                                                                                  ; shape                  ; work         ;
+;    |shape:Block_3|                                      ; 94 (94)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Block_3                                                                                  ; shape                  ; work         ;
+;    |shape:Block_4|                                      ; 94 (94)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Block_4                                                                                  ; shape                  ; work         ;
+;    |shape:Block_5|                                      ; 93 (93)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Block_5                                                                                  ; shape                  ; work         ;
+;    |shape:Spike_1|                                      ; 99 (99)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Spike_1                                                                                  ; shape                  ; work         ;
+;    |shape:Spike_2|                                      ; 98 (98)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Spike_2                                                                                  ; shape                  ; work         ;
+;    |shape:Spike_3|                                      ; 100 (100)           ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Spike_3                                                                                  ; shape                  ; work         ;
+;    |shape:Spike_4|                                      ; 96 (96)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Spike_4                                                                                  ; shape                  ; work         ;
+;    |shape:Spike_5|                                      ; 99 (99)             ; 57 (57)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Spike_5                                                                                  ; shape                  ; work         ;
+;    |shape:Square_frame_1|                               ; 79 (79)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Square_frame_1                                                                           ; shape                  ; work         ;
+;    |shape:Square_frame_2|                               ; 78 (78)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Square_frame_2                                                                           ; shape                  ; work         ;
+;    |shape:Square_frame_3|                               ; 78 (78)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Square_frame_3                                                                           ; shape                  ; work         ;
+;    |shape:Square_frame_4|                               ; 80 (80)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Square_frame_4                                                                           ; shape                  ; work         ;
+;    |shape:Square_frame_5|                               ; 79 (79)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Square_frame_5                                                                           ; shape                  ; work         ;
+;    |shape:Square_frame_6|                               ; 78 (78)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Square_frame_6                                                                           ; shape                  ; work         ;
+;    |shape:Square_frame_7|                               ; 79 (79)             ; 49 (49)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|shape:Square_frame_7                                                                           ; shape                  ; work         ;
+;    |vga_adapter:VGA|                                    ; 137 (1)             ; 34 (0)                    ; 230400      ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA                                                                                ; vga_adapter            ; work         ;
+;       |altsyncram:VideoMemory|                          ; 48 (0)              ; 8 (0)                     ; 230400      ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory                                                         ; altsyncram             ; work         ;
+;          |altsyncram_vhg1:auto_generated|               ; 48 (0)              ; 8 (8)                     ; 230400      ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated                          ; altsyncram_vhg1        ; work         ;
+;             |decode_5ua:decode2|                        ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated|decode_5ua:decode2       ; decode_5ua             ; work         ;
+;             |decode_u9a:rden_decode_b|                  ; 10 (10)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated|decode_u9a:rden_decode_b ; decode_u9a             ; work         ;
+;             |mux_gob:mux3|                              ; 24 (24)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated|mux_gob:mux3             ; mux_gob                ; work         ;
+;       |vga_address_translator:user_input_translator|    ; 20 (20)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_address_translator:user_input_translator                                   ; vga_address_translator ; work         ;
+;       |vga_controller:controller|                       ; 68 (48)             ; 26 (26)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_controller:controller                                                      ; vga_controller         ; work         ;
+;          |vga_address_translator:controller_translator| ; 20 (20)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_controller:controller|vga_address_translator:controller_translator         ; vga_address_translator ; work         ;
 ;       |vga_pll:mypll|                                   ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_pll:mypll                                                                  ; vga_pll                ; work         ;
 ;          |altpll:altpll_component|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |project|vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component                                          ; altpll                 ; work         ;
 +---------------------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------+------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                           ;
-+----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+-----------+
-; Name                                                                             ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF       ;
-+----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+-----------+
-; vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 19200        ; 3            ; 19200        ; 3            ; 57600 ; black.mif ;
-+----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+-----------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                       ;
++----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+------+
+; Name                                                                             ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF  ;
++----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+------+
+; vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 76800        ; 3            ; 76800        ; 3            ; 230400 ; None ;
++----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+------+
 
 
-Encoding Type:  One-Hot
-+-------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |project|control:c0|current_state                                                                             ;
-+---------------------------+-------------------------+----------------------+---------------------------+----------------------+
-; Name                      ; current_state.START_DYE ; current_state.LOAD_Y ; current_state.LOAD_X_WAIT ; current_state.LOAD_X ;
-+---------------------------+-------------------------+----------------------+---------------------------+----------------------+
-; current_state.LOAD_X      ; 0                       ; 0                    ; 0                         ; 0                    ;
-; current_state.LOAD_X_WAIT ; 0                       ; 0                    ; 1                         ; 1                    ;
-; current_state.LOAD_Y      ; 0                       ; 1                    ; 0                         ; 1                    ;
-; current_state.START_DYE   ; 1                       ; 0                    ; 0                         ; 1                    ;
-+---------------------------+-------------------------+----------------------+---------------------------+----------------------+
++----------------------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                                              ;
++-----------------------------------------------------+---------------------------------------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal                               ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------------------------------------+------------------------+
+; control:main_control|curr_shape_id[2]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[3]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[0]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[1]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[4]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|draw_start[5]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|curr_shape_id[6]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[7]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[8]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[9]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[10]              ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|curr_shape_id[5]               ; control:main_control|curr_shape_id[10]            ; yes                    ;
+; control:main_control|is_square_animation_req        ; control:main_control|is_square_animation_req      ; yes                    ;
+; control:main_control|draw_square_frame              ; control:main_control|draw_square_frame            ; yes                    ;
+; control:main_control|curr_shape_id_for_square[2]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|draw_start[9]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|curr_shape_id_for_square[3]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|draw_start[1]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[13]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|curr_shape_id_for_square[0]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|draw_start[10]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[6]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[2]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[14]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|curr_shape_id_for_square[1]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|draw_start[8]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[4]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[0]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[12]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[7]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[11]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[3]                  ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[15]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[16]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|draw_start[17]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|curr_shape_id_for_square[4]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|draw_start[18]                 ; control:main_control|Decoder0                     ; yes                    ;
+; control:main_control|curr_shape_id_for_square[6]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|curr_shape_id_for_square[7]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|curr_shape_id_for_square[8]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|curr_shape_id_for_square[9]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|curr_shape_id_for_square[10]   ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|curr_shape_id_for_square[5]    ; control:main_control|curr_shape_id_for_square[10] ; yes                    ;
+; control:main_control|is_button_pressed              ; control:main_control|is_button_pressed            ; yes                    ;
+; Number of user-specified and inferred latches = 44  ;                                                   ;                        ;
++-----------------------------------------------------+---------------------------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
-+--------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                             ;
-+---------------------------------------+----------------------------------------+
-; Register name                         ; Reason for Removal                     ;
-+---------------------------------------+----------------------------------------+
-; datapath:d0|x_init[7]                 ; Stuck at GND due to stuck port data_in ;
-; control:c0|current_state~2            ; Lost fanout                            ;
-; control:c0|current_state~3            ; Lost fanout                            ;
-; control:c0|current_state~4            ; Lost fanout                            ;
-; Total Number of Removed Registers = 4 ;                                        ;
-+---------------------------------------+----------------------------------------+
++----------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                     ;
++---------------------------------------------+------------------------------------------+
+; Register name                               ; Reason for Removal                       ;
++---------------------------------------------+------------------------------------------+
+; shape:Square_frame_7|move[9,10]             ; Lost fanout                              ;
+; shape:Square_frame_6|move[9,10]             ; Lost fanout                              ;
+; shape:Square_frame_5|move[9,10]             ; Lost fanout                              ;
+; shape:Square_frame_4|move[9,10]             ; Lost fanout                              ;
+; shape:Square_frame_3|move[9,10]             ; Lost fanout                              ;
+; shape:Square_frame_2|move[9,10]             ; Lost fanout                              ;
+; shape:Square_frame_1|move[9,10]             ; Lost fanout                              ;
+; shape:Square_frame_7|move[2..8]             ; Merged with shape:Square_frame_7|move[1] ;
+; shape:Square_frame_6|move[2..8]             ; Merged with shape:Square_frame_6|move[1] ;
+; shape:Square_frame_5|move[2..8]             ; Merged with shape:Square_frame_5|move[1] ;
+; shape:Square_frame_4|move[2..8]             ; Merged with shape:Square_frame_4|move[1] ;
+; shape:Square_frame_3|move[2..8]             ; Merged with shape:Square_frame_3|move[1] ;
+; shape:Square_frame_2|move[2..8]             ; Merged with shape:Square_frame_2|move[1] ;
+; shape:Square_frame_1|move[2..8]             ; Merged with shape:Square_frame_1|move[1] ;
+; shape:Square_frame_7|move[1]                ; Stuck at GND due to stuck port data_in   ;
+; shape:Square_frame_6|move[1]                ; Stuck at GND due to stuck port data_in   ;
+; shape:Square_frame_5|move[1]                ; Stuck at GND due to stuck port data_in   ;
+; shape:Square_frame_4|move[1]                ; Stuck at GND due to stuck port data_in   ;
+; shape:Square_frame_3|move[1]                ; Stuck at GND due to stuck port data_in   ;
+; shape:Square_frame_2|move[1]                ; Stuck at GND due to stuck port data_in   ;
+; shape:Square_frame_1|move[1]                ; Stuck at GND due to stuck port data_in   ;
+; clear_screen:black_screen|curr_y_pos[8..10] ; Lost fanout                              ;
+; shape:Square_frame_1|curr_y_pos[8..10]      ; Lost fanout                              ;
+; shape:Square_frame_2|curr_y_pos[8..10]      ; Lost fanout                              ;
+; shape:Square_frame_3|curr_y_pos[8..10]      ; Lost fanout                              ;
+; shape:Square_frame_4|curr_y_pos[8..10]      ; Lost fanout                              ;
+; shape:Square_frame_5|curr_y_pos[8..10]      ; Lost fanout                              ;
+; shape:Square_frame_6|curr_y_pos[8..10]      ; Lost fanout                              ;
+; shape:Square_frame_7|curr_y_pos[8..10]      ; Lost fanout                              ;
+; shape:Block_1|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Block_2|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Block_3|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Block_4|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Block_5|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Spike_1|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Spike_2|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Spike_3|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Spike_4|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Spike_5|curr_y_pos[8..10]             ; Lost fanout                              ;
+; shape:Block_1|move[9,10]                    ; Lost fanout                              ;
+; shape:Block_2|move[9,10]                    ; Lost fanout                              ;
+; shape:Block_3|move[9,10]                    ; Lost fanout                              ;
+; shape:Block_4|move[9,10]                    ; Lost fanout                              ;
+; shape:Block_5|move[9,10]                    ; Lost fanout                              ;
+; shape:Spike_1|move[9,10]                    ; Lost fanout                              ;
+; shape:Spike_2|move[9,10]                    ; Lost fanout                              ;
+; shape:Spike_3|move[9,10]                    ; Lost fanout                              ;
+; shape:Spike_4|move[9,10]                    ; Lost fanout                              ;
+; shape:Spike_5|move[9,10]                    ; Lost fanout                              ;
+; Total Number of Removed Registers = 144     ;                                          ;
++---------------------------------------------+------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                      ;
++------------------------------------------+--------------------+----------------------------------------------------------------------------------+
+; Register name                            ; Reason for Removal ; Registers Removed due to This Register                                           ;
++------------------------------------------+--------------------+----------------------------------------------------------------------------------+
+; clear_screen:black_screen|curr_y_pos[10] ; Lost Fanouts       ; clear_screen:black_screen|curr_y_pos[9], clear_screen:black_screen|curr_y_pos[8] ;
+; shape:Square_frame_1|curr_y_pos[10]      ; Lost Fanouts       ; shape:Square_frame_1|curr_y_pos[9], shape:Square_frame_1|curr_y_pos[8]           ;
+; shape:Square_frame_2|curr_y_pos[10]      ; Lost Fanouts       ; shape:Square_frame_2|curr_y_pos[9], shape:Square_frame_2|curr_y_pos[8]           ;
+; shape:Square_frame_3|curr_y_pos[10]      ; Lost Fanouts       ; shape:Square_frame_3|curr_y_pos[9], shape:Square_frame_3|curr_y_pos[8]           ;
+; shape:Square_frame_4|curr_y_pos[10]      ; Lost Fanouts       ; shape:Square_frame_4|curr_y_pos[9], shape:Square_frame_4|curr_y_pos[8]           ;
+; shape:Square_frame_5|curr_y_pos[10]      ; Lost Fanouts       ; shape:Square_frame_5|curr_y_pos[9], shape:Square_frame_5|curr_y_pos[8]           ;
+; shape:Square_frame_6|curr_y_pos[10]      ; Lost Fanouts       ; shape:Square_frame_6|curr_y_pos[9], shape:Square_frame_6|curr_y_pos[8]           ;
+; shape:Square_frame_7|curr_y_pos[10]      ; Lost Fanouts       ; shape:Square_frame_7|curr_y_pos[9], shape:Square_frame_7|curr_y_pos[8]           ;
+; shape:Block_1|curr_y_pos[10]             ; Lost Fanouts       ; shape:Block_1|curr_y_pos[9], shape:Block_1|curr_y_pos[8]                         ;
+; shape:Block_2|curr_y_pos[10]             ; Lost Fanouts       ; shape:Block_2|curr_y_pos[9], shape:Block_2|curr_y_pos[8]                         ;
+; shape:Block_3|curr_y_pos[10]             ; Lost Fanouts       ; shape:Block_3|curr_y_pos[9], shape:Block_3|curr_y_pos[8]                         ;
+; shape:Block_4|curr_y_pos[10]             ; Lost Fanouts       ; shape:Block_4|curr_y_pos[9], shape:Block_4|curr_y_pos[8]                         ;
+; shape:Block_5|curr_y_pos[10]             ; Lost Fanouts       ; shape:Block_5|curr_y_pos[9], shape:Block_5|curr_y_pos[8]                         ;
+; shape:Spike_1|curr_y_pos[10]             ; Lost Fanouts       ; shape:Spike_1|curr_y_pos[9], shape:Spike_1|curr_y_pos[8]                         ;
+; shape:Spike_2|curr_y_pos[10]             ; Lost Fanouts       ; shape:Spike_2|curr_y_pos[9], shape:Spike_2|curr_y_pos[8]                         ;
+; shape:Spike_3|curr_y_pos[10]             ; Lost Fanouts       ; shape:Spike_3|curr_y_pos[9], shape:Spike_3|curr_y_pos[8]                         ;
+; shape:Spike_4|curr_y_pos[10]             ; Lost Fanouts       ; shape:Spike_4|curr_y_pos[9], shape:Spike_4|curr_y_pos[8]                         ;
+; shape:Spike_5|curr_y_pos[10]             ; Lost Fanouts       ; shape:Spike_5|curr_y_pos[9], shape:Spike_5|curr_y_pos[8]                         ;
++------------------------------------------+--------------------+----------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -308,33 +458,157 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 87    ;
-; Number of registers using Synchronous Clear  ; 37    ;
-; Number of registers using Synchronous Load   ; 15    ;
+; Total registers                              ; 1022  ;
+; Number of registers using Synchronous Clear  ; 198   ;
+; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 20    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 53    ;
+; Number of registers using Clock Enable       ; 574   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------+
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |project|datapath:d0|clr[2]                                                                                ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |project|vga_adapter:VGA|vga_controller:controller|yCounter[5]                                             ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |project|datapath:d0|x_init[0]                                                                             ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |project|datapath:d0|y_init[4]                                                                             ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |project|datapath:d0|initializer[13]                                                                       ;
-; 4:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |project|datapath:d0|y[2]                                                                                  ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |project|vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|mux_0nb:mux3|result_node[2] ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------+
+; Inverted Register Statistics                        ;
++-------------------------------------------+---------+
+; Inverted Register                         ; Fan out ;
++-------------------------------------------+---------+
+; frames_per_second_60:FPS|send_counter[2]  ; 2       ;
+; frames_per_second_60:FPS|send_counter[4]  ; 2       ;
+; frames_per_second_60:FPS|send_counter[5]  ; 2       ;
+; frames_per_second_60:FPS|send_counter[8]  ; 2       ;
+; frames_per_second_60:FPS|send_counter[9]  ; 2       ;
+; frames_per_second_60:FPS|send_counter[10] ; 2       ;
+; frames_per_second_60:FPS|send_counter[12] ; 2       ;
+; frames_per_second_60:FPS|send_counter[13] ; 2       ;
+; frames_per_second_60:FPS|send_counter[15] ; 2       ;
+; frames_per_second_60:FPS|send_counter[18] ; 2       ;
+; frames_per_second_60:FPS|send_counter[19] ; 2       ;
+; shape:Spike_5|curr_y_pos[4]               ; 5       ;
+; shape:Spike_5|curr_y_pos[5]               ; 4       ;
+; shape:Spike_5|curr_y_pos[7]               ; 2       ;
+; shape:Spike_5|curr_y_pos[6]               ; 3       ;
+; shape:Spike_5|curr_x_pos[4]               ; 3       ;
+; shape:Spike_5|curr_x_pos[5]               ; 3       ;
+; shape:Spike_5|curr_x_pos[6]               ; 3       ;
+; shape:Spike_5|curr_x_pos[7]               ; 3       ;
+; shape:Spike_5|curr_x_pos[8]               ; 3       ;
+; shape:Spike_5|curr_x_pos[9]               ; 2       ;
+; shape:Spike_5|curr_x_pos[10]              ; 2       ;
+; shape:Spike_5|curr_x_pos[3]               ; 5       ;
+; shape:Spike_5|curr_y_pos[1]               ; 6       ;
+; shape:Spike_5|curr_x_pos[1]               ; 5       ;
+; shape:Spike_5|curr_x_pos[2]               ; 5       ;
+; shape:Spike_5|curr_x_pos[0]               ; 5       ;
+; shape:Spike_5|curr_y_pos[2]               ; 3       ;
+; shape:Spike_5|curr_y_pos[3]               ; 3       ;
+; shape:Spike_4|curr_y_pos[7]               ; 2       ;
+; shape:Spike_4|curr_y_pos[6]               ; 2       ;
+; shape:Spike_4|curr_y_pos[5]               ; 2       ;
+; shape:Spike_4|curr_y_pos[4]               ; 2       ;
+; shape:Spike_4|curr_y_pos[3]               ; 3       ;
+; shape:Spike_4|curr_y_pos[2]               ; 3       ;
+; shape:Spike_4|curr_y_pos[1]               ; 7       ;
+; shape:Spike_4|curr_x_pos[4]               ; 3       ;
+; shape:Spike_4|curr_x_pos[5]               ; 3       ;
+; shape:Spike_4|curr_x_pos[6]               ; 3       ;
+; shape:Spike_4|curr_x_pos[7]               ; 3       ;
+; shape:Spike_4|curr_x_pos[8]               ; 3       ;
+; shape:Spike_4|curr_x_pos[9]               ; 2       ;
+; shape:Spike_4|curr_x_pos[10]              ; 2       ;
+; shape:Spike_4|curr_x_pos[3]               ; 5       ;
+; shape:Spike_4|curr_x_pos[1]               ; 5       ;
+; shape:Spike_4|curr_x_pos[2]               ; 5       ;
+; shape:Spike_4|curr_x_pos[0]               ; 5       ;
+; shape:Block_3|curr_y_pos[7]               ; 2       ;
+; shape:Block_3|curr_y_pos[6]               ; 2       ;
+; shape:Block_3|curr_y_pos[5]               ; 2       ;
+; shape:Block_3|curr_y_pos[4]               ; 2       ;
+; shape:Block_3|curr_y_pos[3]               ; 2       ;
+; shape:Block_3|curr_y_pos[2]               ; 2       ;
+; shape:Block_3|curr_y_pos[1]               ; 3       ;
+; shape:Block_3|curr_x_pos[4]               ; 3       ;
+; shape:Block_3|curr_x_pos[5]               ; 3       ;
+; shape:Block_3|curr_x_pos[6]               ; 3       ;
+; shape:Block_3|curr_x_pos[7]               ; 3       ;
+; shape:Block_3|curr_x_pos[8]               ; 3       ;
+; shape:Block_3|curr_x_pos[9]               ; 2       ;
+; shape:Block_3|curr_x_pos[10]              ; 2       ;
+; shape:Block_3|curr_x_pos[3]               ; 4       ;
+; shape:Block_3|curr_x_pos[2]               ; 4       ;
+; shape:Block_3|curr_x_pos[1]               ; 4       ;
+; shape:Block_3|curr_x_pos[0]               ; 4       ;
+; shape:Square_frame_6|curr_y_pos[7]        ; 2       ;
+; shape:Square_frame_6|curr_y_pos[6]        ; 2       ;
+; shape:Square_frame_6|curr_y_pos[5]        ; 2       ;
+; shape:Square_frame_6|curr_y_pos[4]        ; 2       ;
+; shape:Square_frame_6|curr_y_pos[3]        ; 2       ;
+; shape:Square_frame_6|curr_y_pos[2]        ; 2       ;
+; shape:Square_frame_6|curr_y_pos[1]        ; 2       ;
+; shape:Square_frame_6|curr_y_pos[0]        ; 3       ;
+; shape:Square_frame_6|curr_x_pos[4]        ; 3       ;
+; shape:Square_frame_6|curr_x_pos[5]        ; 3       ;
+; shape:Square_frame_6|curr_x_pos[6]        ; 3       ;
+; shape:Square_frame_6|curr_x_pos[7]        ; 3       ;
+; shape:Square_frame_6|curr_x_pos[3]        ; 4       ;
+; shape:Square_frame_6|curr_x_pos[2]        ; 4       ;
+; shape:Square_frame_6|curr_x_pos[1]        ; 5       ;
+; shape:Square_frame_6|curr_x_pos[0]        ; 4       ;
+; shape:Square_frame_6|curr_x_pos[8]        ; 4       ;
+; shape:Square_frame_6|curr_x_pos[9]        ; 3       ;
+; shape:Square_frame_6|curr_x_pos[10]       ; 3       ;
+; shape:Square_frame_2|curr_y_pos[7]        ; 2       ;
+; shape:Square_frame_2|curr_y_pos[6]        ; 2       ;
+; shape:Square_frame_2|curr_y_pos[5]        ; 2       ;
+; shape:Square_frame_2|curr_y_pos[4]        ; 2       ;
+; shape:Square_frame_2|curr_y_pos[3]        ; 2       ;
+; shape:Square_frame_2|curr_y_pos[2]        ; 2       ;
+; shape:Square_frame_2|curr_y_pos[1]        ; 2       ;
+; shape:Square_frame_2|curr_y_pos[0]        ; 3       ;
+; shape:Square_frame_2|curr_x_pos[4]        ; 3       ;
+; shape:Square_frame_2|curr_x_pos[5]        ; 3       ;
+; shape:Square_frame_2|curr_x_pos[6]        ; 3       ;
+; shape:Square_frame_2|curr_x_pos[7]        ; 3       ;
+; shape:Square_frame_2|curr_x_pos[3]        ; 4       ;
+; shape:Square_frame_2|curr_x_pos[2]        ; 4       ;
+; shape:Square_frame_2|curr_x_pos[1]        ; 5       ;
+; shape:Square_frame_2|curr_x_pos[0]        ; 4       ;
+; Total number of inverted registers = 353* ;         ;
++-------------------------------------------+---------+
+* Table truncated at 100 items. To change the number of inverted registers reported, set the "Number of Inverted Registers Reported" option under Assignments->Settings->Analysis and Synthesis Settings->More Settings
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |project|vga_adapter:VGA|vga_controller:controller|yCounter[2] ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Spike_5|num_rows_done[1]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Spike_4|num_rows_done[2]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Spike_3|num_rows_done[0]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Spike_2|num_rows_done[4]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Spike_1|num_rows_done[0]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Block_5|num_rows_done[2]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Block_4|num_rows_done[8]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Block_3|num_rows_done[2]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Block_2|num_rows_done[1]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Block_1|num_rows_done[9]                        ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Square_frame_7|num_rows_done[0]                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Square_frame_6|num_rows_done[8]                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Square_frame_5|num_rows_done[1]                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Square_frame_4|num_rows_done[0]                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Square_frame_3|num_rows_done[7]                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Square_frame_2|num_rows_done[6]                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|shape:Square_frame_1|num_rows_done[1]                 ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |project|clear_screen:black_screen|num_rows_done[4]            ;
+; 5:1                ; 11 bits   ; 33 LEs        ; 22 LEs               ; 11 LEs                 ; No         ; |project|control:main_control|curr_shape_id[6]                 ;
+; 19:1               ; 17 bits   ; 204 LEs       ; 204 LEs              ; 0 LEs                  ; No         ; |project|control:main_control|Mux8                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------+
-; Source assignments for vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated ;
+; Source assignments for vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated ;
 +---------------------------------+--------------------+------+--------------------------------+
 ; Assignment                      ; Value              ; From ; To                             ;
 +---------------------------------+--------------------+------+--------------------------------+
@@ -344,14 +618,14 @@ Encoding Type:  One-Hot
 
 +--------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: vga_adapter:VGA ;
-+-------------------------+-----------+------------------------+
-; Parameter Name          ; Value     ; Type                   ;
-+-------------------------+-----------+------------------------+
-; BITS_PER_COLOUR_CHANNEL ; 1         ; Signed Integer         ;
-; MONOCHROME              ; FALSE     ; String                 ;
-; RESOLUTION              ; 160x120   ; String                 ;
-; BACKGROUND_IMAGE        ; black.mif ; String                 ;
-+-------------------------+-----------+------------------------+
++-------------------------+----------------+-------------------+
+; Parameter Name          ; Value          ; Type              ;
++-------------------------+----------------+-------------------+
+; BITS_PER_COLOUR_CHANNEL ; 1              ; Signed Integer    ;
+; MONOCHROME              ; FALSE          ; String            ;
+; RESOLUTION              ; 320x240        ; String            ;
+; BACKGROUND_IMAGE        ; background.mif ; String            ;
++-------------------------+----------------+-------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -360,7 +634,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+---------+--------------------------------------------------------------------------------+
 ; Parameter Name ; Value   ; Type                                                                           ;
 +----------------+---------+--------------------------------------------------------------------------------+
-; RESOLUTION     ; 160x120 ; String                                                                         ;
+; RESOLUTION     ; 320x240 ; String                                                                         ;
 +----------------+---------+--------------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -378,8 +652,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WIDTH_BYTEENA                      ; 1                    ; Untyped                 ;
 ; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                 ;
 ; WIDTH_A                            ; 3                    ; Signed Integer          ;
-; WIDTHAD_A                          ; 15                   ; Signed Integer          ;
-; NUMWORDS_A                         ; 19200                ; Signed Integer          ;
+; WIDTHAD_A                          ; 17                   ; Signed Integer          ;
+; NUMWORDS_A                         ; 76800                ; Signed Integer          ;
 ; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                 ;
 ; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                 ;
 ; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                 ;
@@ -387,8 +661,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; INDATA_ACLR_A                      ; NONE                 ; Untyped                 ;
 ; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                 ;
 ; WIDTH_B                            ; 3                    ; Signed Integer          ;
-; WIDTHAD_B                          ; 15                   ; Signed Integer          ;
-; NUMWORDS_B                         ; 19200                ; Signed Integer          ;
+; WIDTHAD_B                          ; 17                   ; Signed Integer          ;
+; NUMWORDS_B                         ; 76800                ; Signed Integer          ;
 ; INDATA_REG_B                       ; CLOCK1               ; Untyped                 ;
 ; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                 ;
 ; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                 ;
@@ -408,7 +682,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                 ;
 ; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                 ;
 ; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                 ;
-; INIT_FILE                          ; black.mif            ; Untyped                 ;
+; INIT_FILE                          ; background.mif       ; Untyped                 ;
 ; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                 ;
 ; MAXIMUM_DEPTH                      ; 0                    ; Untyped                 ;
 ; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                 ;
@@ -421,7 +695,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                 ;
 ; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                 ;
 ; DEVICE_FAMILY                      ; Cyclone IV E         ; Untyped                 ;
-; CBXI_PARAMETER                     ; altsyncram_60g1      ; Untyped                 ;
+; CBXI_PARAMETER                     ; altsyncram_vhg1      ; Untyped                 ;
 +------------------------------------+----------------------+-------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -807,7 +1081,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------+------------+-------------------------------------------------+
 ; BITS_PER_COLOUR_CHANNEL ; 1          ; Signed Integer                                  ;
 ; MONOCHROME              ; FALSE      ; String                                          ;
-; RESOLUTION              ; 160x120    ; String                                          ;
+; RESOLUTION              ; 320x240    ; String                                          ;
 ; C_VERT_NUM_PIXELS       ; 0111100000 ; Unsigned Binary                                 ;
 ; C_VERT_SYNC_START       ; 0111101101 ; Unsigned Binary                                 ;
 ; C_VERT_SYNC_END         ; 0111101110 ; Unsigned Binary                                 ;
@@ -825,7 +1099,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+---------+----------------------------------------------------------------------------------------------------------+
 ; Parameter Name ; Value   ; Type                                                                                                     ;
 +----------------+---------+----------------------------------------------------------------------------------------------------------+
-; RESOLUTION     ; 160x120 ; String                                                                                                   ;
+; RESOLUTION     ; 320x240 ; String                                                                                                   ;
 +----------------+---------+----------------------------------------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -839,10 +1113,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Entity Instance                           ; vga_adapter:VGA|altsyncram:VideoMemory ;
 ;     -- OPERATION_MODE                     ; DUAL_PORT                              ;
 ;     -- WIDTH_A                            ; 3                                      ;
-;     -- NUMWORDS_A                         ; 19200                                  ;
+;     -- NUMWORDS_A                         ; 76800                                  ;
 ;     -- OUTDATA_REG_A                      ; UNREGISTERED                           ;
 ;     -- WIDTH_B                            ; 3                                      ;
-;     -- NUMWORDS_B                         ; 19200                                  ;
+;     -- NUMWORDS_B                         ; 76800                                  ;
 ;     -- ADDRESS_REG_B                      ; CLOCK1                                 ;
 ;     -- OUTDATA_REG_B                      ; CLOCK1                                 ;
 ;     -- RAM_BLOCK_TYPE                     ; AUTO                                   ;
@@ -867,13 +1141,415 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+-------------------------------------------------------+
 
 
-+--------------------------------------------+
-; Port Connectivity Checks: "datapath:d0"    ;
-+----------+-------+----------+--------------+
-; Port     ; Type  ; Severity ; Details      ;
-+----------+-------+----------+--------------+
-; x_pos[7] ; Input ; Info     ; Stuck at GND ;
-+----------+-------+----------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "control:main_control"                                                                                                                   ;
++------------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                                                                           ;
++------------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; draw_start ; Output ; Warning  ; Output or bidir port (19 bits) is wider than the port expression (18 bits) it drives; bit(s) "draw_start[18..18]" have no fanouts ;
++------------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Spike_5"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[7..3]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[2]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[1]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Spike_4"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[7..4]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[3..0]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Spike_3"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[7..5]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[2..1]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[4..3]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Spike_2"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[7..6]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[4..2]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[1..0]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[5]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Spike_1"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[7..6]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[3..2]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[5]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[4]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[1]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[56..55]          ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[45..44]          ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[109..100]        ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[98..89]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[87..79]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[77..68]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[66..57]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[54..46]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[43..36]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[34..25]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[23..14]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[10..3]           ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[99]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[88]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[78]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[67]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[35]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[24]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[13]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[12]              ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[11]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[2]               ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_start[1]               ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_start[0]               ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[35..33]            ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[24..22]            ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[13..12]            ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[2..1]              ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[109..103]          ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[99..92]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[88..81]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[79..78]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[76..70]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[68..67]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[65..59]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[57..48]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[46..36]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[32..25]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[21..14]            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[11..3]             ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[102]               ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[101]               ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[100]               ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[91]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[90]                ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_row_end[89]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[80]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[77]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[69]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[66]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[58]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[47]                ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_row_end[0]                 ; Input  ; Info     ; Stuck at GND                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Block_5"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[7..6]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[5..4]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[2..0]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[3]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Block_4"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[5..1]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[7]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[6]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Block_3"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[5..4]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[1..0]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[7]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[6]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[3]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[2]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_y_pos[10..6] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[2..0]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[5]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_y_pos[4]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[3]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Block_2"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[7]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[6]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[5]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[4]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[3]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[2]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[1]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[5..2]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_y_pos[10..6] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[1..0]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Block_1"                                                                                                 ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                            ; Type   ; Severity ; Details                                                                             ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; load_bottom_corner_x_pos[10..8] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[4..0]  ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[7]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_x_pos[6]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_x_pos[5]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_y_pos[4..3]  ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_y_pos[10..7] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[6]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_y_pos[5]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[2]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; load_bottom_corner_y_pos[1]     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; load_bottom_corner_y_pos[0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; is_obstacle                     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; send_bottom_corner_x_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; send_bottom_corner_y_pos        ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "shape:Square_frame_7" ;
++-------------+-------+----------+-----------------+
+; Port        ; Type  ; Severity ; Details         ;
++-------------+-------+----------+-----------------+
+; is_obstacle ; Input ; Info     ; Stuck at GND    ;
++-------------+-------+----------+-----------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "shape:Square_frame_6" ;
++-------------+-------+----------+-----------------+
+; Port        ; Type  ; Severity ; Details         ;
++-------------+-------+----------+-----------------+
+; is_obstacle ; Input ; Info     ; Stuck at GND    ;
++-------------+-------+----------+-----------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "shape:Square_frame_5" ;
++-------------+-------+----------+-----------------+
+; Port        ; Type  ; Severity ; Details         ;
++-------------+-------+----------+-----------------+
+; is_obstacle ; Input ; Info     ; Stuck at GND    ;
++-------------+-------+----------+-----------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "shape:Square_frame_4" ;
++-------------+-------+----------+-----------------+
+; Port        ; Type  ; Severity ; Details         ;
++-------------+-------+----------+-----------------+
+; is_obstacle ; Input ; Info     ; Stuck at GND    ;
++-------------+-------+----------+-----------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "shape:Square_frame_3" ;
++-------------+-------+----------+-----------------+
+; Port        ; Type  ; Severity ; Details         ;
++-------------+-------+----------+-----------------+
+; is_obstacle ; Input ; Info     ; Stuck at GND    ;
++-------------+-------+----------+-----------------+
+
+
++-----------------------------------------------------+
+; Port Connectivity Checks: "shape:Square_frame_2"    ;
++-------------------+-------+----------+--------------+
+; Port              ; Type  ; Severity ; Details      ;
++-------------------+-------+----------+--------------+
+; load_colour[1..0] ; Input ; Info     ; Stuck at GND ;
+; load_colour[2]    ; Input ; Info     ; Stuck at VCC ;
+; is_obstacle       ; Input ; Info     ; Stuck at GND ;
++-------------------+-------+----------+--------------+
+
+
++------------------------------------------------------------+
+; Port Connectivity Checks: "shape:Square_frame_1"           ;
++--------------------------+-------+----------+--------------+
+; Port                     ; Type  ; Severity ; Details      ;
++--------------------------+-------+----------+--------------+
+; load_colour              ; Input ; Info     ; Stuck at VCC ;
+; load_num_rows[10..4]     ; Input ; Info     ; Stuck at GND ;
+; load_num_rows[3]         ; Input ; Info     ; Stuck at VCC ;
+; load_num_rows[2]         ; Input ; Info     ; Stuck at GND ;
+; load_num_rows[1]         ; Input ; Info     ; Stuck at VCC ;
+; load_num_rows[0]         ; Input ; Info     ; Stuck at GND ;
+; load_num_columns[10..4]  ; Input ; Info     ; Stuck at GND ;
+; load_num_columns[3]      ; Input ; Info     ; Stuck at VCC ;
+; load_num_columns[2]      ; Input ; Info     ; Stuck at GND ;
+; load_num_columns[1]      ; Input ; Info     ; Stuck at VCC ;
+; load_num_columns[0]      ; Input ; Info     ; Stuck at GND ;
+; is_obstacle              ; Input ; Info     ; Stuck at GND ;
+; load_row_start[109..100] ; Input ; Info     ; Stuck at GND ;
+; load_row_start[98..89]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[87..78]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[76..67]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[65..56]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[54..45]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[43..34]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[32..23]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[21..12]   ; Input ; Info     ; Stuck at GND ;
+; load_row_start[10..1]    ; Input ; Info     ; Stuck at GND ;
+; load_row_start[99]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[88]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[77]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[66]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[55]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[44]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[33]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[22]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[11]       ; Input ; Info     ; Stuck at VCC ;
+; load_row_start[0]        ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[109..103]   ; Input ; Info     ; Stuck at GND ;
+; load_row_end[99..92]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[88..81]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[77..70]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[66..59]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[55..48]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[44..37]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[33..26]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[22..15]     ; Input ; Info     ; Stuck at GND ;
+; load_row_end[11..4]      ; Input ; Info     ; Stuck at GND ;
+; load_row_end[102]        ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[101]        ; Input ; Info     ; Stuck at GND ;
+; load_row_end[100]        ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[91]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[90]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[89]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[80]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[79]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[78]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[69]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[68]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[67]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[58]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[57]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[56]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[47]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[46]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[45]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[36]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[35]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[34]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[25]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[24]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[23]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[14]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[13]         ; Input ; Info     ; Stuck at GND ;
+; load_row_end[12]         ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[3]          ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[2]          ; Input ; Info     ; Stuck at GND ;
+; load_row_end[1]          ; Input ; Info     ; Stuck at VCC ;
+; load_row_end[0]          ; Input ; Info     ; Stuck at GND ;
++--------------------------+-------+----------+--------------+
+
+
++-----------------------------------------------------------+
+; Port Connectivity Checks: "clear_screen:black_screen"     ;
++-------------------------+-------+----------+--------------+
+; Port                    ; Type  ; Severity ; Details      ;
++-------------------------+-------+----------+--------------+
+; load_colour             ; Input ; Info     ; Stuck at GND ;
+; load_num_rows[6..3]     ; Input ; Info     ; Stuck at VCC ;
+; load_num_rows[10..7]    ; Input ; Info     ; Stuck at GND ;
+; load_num_rows[2..0]     ; Input ; Info     ; Stuck at GND ;
+; load_num_columns[10..8] ; Input ; Info     ; Stuck at GND ;
+; load_num_columns[4..0]  ; Input ; Info     ; Stuck at GND ;
+; load_num_columns[7]     ; Input ; Info     ; Stuck at VCC ;
+; load_num_columns[6]     ; Input ; Info     ; Stuck at GND ;
+; load_num_columns[5]     ; Input ; Info     ; Stuck at VCC ;
++-------------------------+-------+----------+--------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "vga_adapter:VGA"                                                                                                                                                                   ;
++-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                                                                                                                           ;
++-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; x     ; Input  ; Warning  ; Input port expression (11 bits) is wider than the input port (9 bits) it drives.  The 2 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; y     ; Input  ; Warning  ; Input port expression (11 bits) is wider than the input port (8 bits) it drives.  The 3 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; plot  ; Input  ; Info     ; Stuck at VCC                                                                                                                                                                      ;
+; VGA_R ; Output ; Warning  ; Output or bidir port (10 bits) is smaller than the port expression (11 bits) it drives.  The 1 most-significant bit(s) in the port expression will be connected to GND.           ;
+; VGA_G ; Output ; Warning  ; Output or bidir port (10 bits) is smaller than the port expression (11 bits) it drives.  The 1 most-significant bit(s) in the port expression will be connected to GND.           ;
+; VGA_B ; Output ; Warning  ; Output or bidir port (10 bits) is smaller than the port expression (11 bits) it drives.  The 1 most-significant bit(s) in the port expression will be connected to GND.           ;
++-------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -881,29 +1557,27 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 50                          ;
-; cycloneiii_ff         ; 87                          ;
+; boundary_port         ; 79                          ;
+; cycloneiii_ff         ; 1022                        ;
 ;     CLR               ; 20                          ;
-;     ENA               ; 17                          ;
-;     ENA SCLR          ; 21                          ;
-;     ENA SCLR SLD      ; 15                          ;
-;     SCLR              ; 1                           ;
-;     plain             ; 13                          ;
-; cycloneiii_lcell_comb ; 176                         ;
-;     arith             ; 95                          ;
-;         2 data inputs ; 62                          ;
-;         3 data inputs ; 33                          ;
-;     normal            ; 81                          ;
+;     ENA               ; 376                         ;
+;     ENA SCLR          ; 198                         ;
+;     plain             ; 428                         ;
+; cycloneiii_lcell_comb ; 2139                        ;
+;     arith             ; 877                         ;
+;         2 data inputs ; 588                         ;
+;         3 data inputs ; 289                         ;
+;     normal            ; 1262                        ;
 ;         0 data inputs ; 4                           ;
-;         1 data inputs ; 8                           ;
-;         2 data inputs ; 21                          ;
-;         3 data inputs ; 8                           ;
-;         4 data inputs ; 40                          ;
+;         1 data inputs ; 158                         ;
+;         2 data inputs ; 103                         ;
+;         3 data inputs ; 476                         ;
+;         4 data inputs ; 521                         ;
 ; cycloneiii_pll        ; 1                           ;
-; cycloneiii_ram_block  ; 9                           ;
+; cycloneiii_ram_block  ; 30                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 4.00                        ;
-; Average LUT depth     ; 2.25                        ;
+; Max LUT depth         ; 9.80                        ;
+; Average LUT depth     ; 3.62                        ;
 +-----------------------+-----------------------------+
 
 
@@ -912,7 +1586,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:05     ;
 +----------------+--------------+
 
 
@@ -922,59 +1596,72 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
-    Info: Processing started: Fri Jul 07 20:45:41 2017
+    Info: Processing started: Tue Jul 11 12:55:20 2017
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off project -c project
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file vga_adapter/vga_pll.v
-    Info (12023): Found entity 1: vga_pll File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_pll.v Line: 36
+    Info (12023): Found entity 1: vga_pll File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_pll.v Line: 36
 Info (12021): Found 1 design units, including 1 entities, in source file vga_adapter/vga_controller.v
-    Info (12023): Found entity 1: vga_controller File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_controller.v Line: 9
+    Info (12023): Found entity 1: vga_controller File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_controller.v Line: 9
 Info (12021): Found 1 design units, including 1 entities, in source file vga_adapter/vga_address_translator.v
-    Info (12023): Found entity 1: vga_address_translator File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_address_translator.v Line: 4
+    Info (12023): Found entity 1: vga_address_translator File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_address_translator.v Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file vga_adapter/vga_adapter.v
-    Info (12023): Found entity 1: vga_adapter File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v Line: 78
-Info (12021): Found 3 design units, including 3 entities, in source file project.v
-    Info (12023): Found entity 1: project File: C:/Users/DAVID/Desktop/project/project.v Line: 3
-    Info (12023): Found entity 2: datapath File: C:/Users/DAVID/Desktop/project/project.v Line: 102
-    Info (12023): Found entity 3: control File: C:/Users/DAVID/Desktop/project/project.v Line: 158
+    Info (12023): Found entity 1: vga_adapter File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 78
+Warning (10238): Verilog Module Declaration warning at project.v(1598): ignored anonymous port(s) indicated by duplicate or dangling comma(s) in the port list for module "clear_screen" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1598
+Info (12021): Found 7 design units, including 7 entities, in source file project.v
+    Info (12023): Found entity 1: project File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1
+    Info (12023): Found entity 2: fake_VGA_adapter File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1550
+    Info (12023): Found entity 3: clear_screen File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1586
+    Info (12023): Found entity 4: shape File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1694
+    Info (12023): Found entity 5: frames_per_second_60 File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1863
+    Info (12023): Found entity 6: block_detector File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1888
+    Info (12023): Found entity 7: control File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2002
 Info (12127): Elaborating entity "project" for the top level hierarchy
-Info (12128): Elaborating entity "vga_adapter" for hierarchy "vga_adapter:VGA" File: C:/Users/DAVID/Desktop/project/project.v Line: 62
-Info (12128): Elaborating entity "vga_address_translator" for hierarchy "vga_adapter:VGA|vga_address_translator:user_input_translator" File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v Line: 192
-Info (12128): Elaborating entity "altsyncram" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory" File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v Line: 213
-Info (12130): Elaborated megafunction instantiation "vga_adapter:VGA|altsyncram:VideoMemory" File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v Line: 213
-Info (12133): Instantiated megafunction "vga_adapter:VGA|altsyncram:VideoMemory" with the following parameter: File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v Line: 213
+Warning (10036): Verilog HDL or VHDL warning at project.v(49): object "dark_blue" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 49
+Warning (10036): Verilog HDL or VHDL warning at project.v(50): object "light_green" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 50
+Warning (10036): Verilog HDL or VHDL warning at project.v(51): object "light_blue" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 51
+Warning (10036): Verilog HDL or VHDL warning at project.v(53): object "pink" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 53
+Warning (10036): Verilog HDL or VHDL warning at project.v(54): object "yellow" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 54
+Warning (10036): Verilog HDL or VHDL warning at project.v(63): object "empty_row" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 63
+Warning (10034): Output port "LEDR" at project.v(22) has no driver File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+Info (12128): Elaborating entity "vga_adapter" for hierarchy "vga_adapter:VGA" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 511
+Info (12128): Elaborating entity "vga_address_translator" for hierarchy "vga_adapter:VGA|vga_address_translator:user_input_translator" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 192
+Info (12128): Elaborating entity "altsyncram" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 213
+Info (12130): Elaborated megafunction instantiation "vga_adapter:VGA|altsyncram:VideoMemory" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 213
+Info (12133): Instantiated megafunction "vga_adapter:VGA|altsyncram:VideoMemory" with the following parameter: File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 213
     Info (12134): Parameter "WIDTH_A" = "3"
     Info (12134): Parameter "WIDTH_B" = "3"
     Info (12134): Parameter "INTENDED_DEVICE_FAMILY" = "Cyclone II"
     Info (12134): Parameter "OPERATION_MODE" = "DUAL_PORT"
-    Info (12134): Parameter "WIDTHAD_A" = "15"
-    Info (12134): Parameter "NUMWORDS_A" = "19200"
-    Info (12134): Parameter "WIDTHAD_B" = "15"
-    Info (12134): Parameter "NUMWORDS_B" = "19200"
+    Info (12134): Parameter "WIDTHAD_A" = "17"
+    Info (12134): Parameter "NUMWORDS_A" = "76800"
+    Info (12134): Parameter "WIDTHAD_B" = "17"
+    Info (12134): Parameter "NUMWORDS_B" = "76800"
     Info (12134): Parameter "OUTDATA_REG_B" = "CLOCK1"
     Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK1"
     Info (12134): Parameter "CLOCK_ENABLE_INPUT_A" = "BYPASS"
     Info (12134): Parameter "CLOCK_ENABLE_INPUT_B" = "BYPASS"
     Info (12134): Parameter "CLOCK_ENABLE_OUTPUT_B" = "BYPASS"
     Info (12134): Parameter "POWER_UP_UNINITIALIZED" = "FALSE"
-    Info (12134): Parameter "INIT_FILE" = "black.mif"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_60g1.tdf
-    Info (12023): Found entity 1: altsyncram_60g1 File: C:/Users/DAVID/Desktop/project/db/altsyncram_60g1.tdf Line: 34
-Info (12128): Elaborating entity "altsyncram_60g1" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Info (12021): Found 1 design units, including 1 entities, in source file db/decode_lsa.tdf
-    Info (12023): Found entity 1: decode_lsa File: C:/Users/DAVID/Desktop/project/db/decode_lsa.tdf Line: 23
-Info (12128): Elaborating entity "decode_lsa" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|decode_lsa:decode2" File: C:/Users/DAVID/Desktop/project/db/altsyncram_60g1.tdf Line: 47
-Info (12021): Found 1 design units, including 1 entities, in source file db/decode_e8a.tdf
-    Info (12023): Found entity 1: decode_e8a File: C:/Users/DAVID/Desktop/project/db/decode_e8a.tdf Line: 23
-Info (12128): Elaborating entity "decode_e8a" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|decode_e8a:rden_decode_b" File: C:/Users/DAVID/Desktop/project/db/altsyncram_60g1.tdf Line: 48
-Info (12021): Found 1 design units, including 1 entities, in source file db/mux_0nb.tdf
-    Info (12023): Found entity 1: mux_0nb File: C:/Users/DAVID/Desktop/project/db/mux_0nb.tdf Line: 23
-Info (12128): Elaborating entity "mux_0nb" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_60g1:auto_generated|mux_0nb:mux3" File: C:/Users/DAVID/Desktop/project/db/altsyncram_60g1.tdf Line: 50
-Info (12128): Elaborating entity "vga_pll" for hierarchy "vga_adapter:VGA|vga_pll:mypll" File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v Line: 231
-Info (12128): Elaborating entity "altpll" for hierarchy "vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component" File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_pll.v Line: 53
-Info (12130): Elaborated megafunction instantiation "vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component" File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_pll.v Line: 53
-Info (12133): Instantiated megafunction "vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component" with the following parameter: File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_pll.v Line: 53
+    Info (12134): Parameter "INIT_FILE" = "background.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_vhg1.tdf
+    Info (12023): Found entity 1: altsyncram_vhg1 File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/altsyncram_vhg1.tdf Line: 34
+Info (12128): Elaborating entity "altsyncram_vhg1" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated" File: c:/intelfpga_lite/17.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Critical Warning (127003): Can't find Memory Initialization File or Hexadecimal (Intel-Format) File C:/Users/DAVID/Documents/GitHub/cscb58_project/project/background.mif -- setting all initial values to 0 File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 213
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_5ua.tdf
+    Info (12023): Found entity 1: decode_5ua File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/decode_5ua.tdf Line: 23
+Info (12128): Elaborating entity "decode_5ua" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated|decode_5ua:decode2" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/altsyncram_vhg1.tdf Line: 47
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_u9a.tdf
+    Info (12023): Found entity 1: decode_u9a File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/decode_u9a.tdf Line: 23
+Info (12128): Elaborating entity "decode_u9a" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated|decode_u9a:rden_decode_b" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/altsyncram_vhg1.tdf Line: 48
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_gob.tdf
+    Info (12023): Found entity 1: mux_gob File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/mux_gob.tdf Line: 23
+Info (12128): Elaborating entity "mux_gob" for hierarchy "vga_adapter:VGA|altsyncram:VideoMemory|altsyncram_vhg1:auto_generated|mux_gob:mux3" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/db/altsyncram_vhg1.tdf Line: 50
+Info (12128): Elaborating entity "vga_pll" for hierarchy "vga_adapter:VGA|vga_pll:mypll" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 231
+Info (12128): Elaborating entity "altpll" for hierarchy "vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_pll.v Line: 53
+Info (12130): Elaborated megafunction instantiation "vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_pll.v Line: 53
+Info (12133): Instantiated megafunction "vga_adapter:VGA|vga_pll:mypll|altpll:altpll_component" with the following parameter: File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_pll.v Line: 53
     Info (12134): Parameter "operation_mode" = "NORMAL"
     Info (12134): Parameter "intended_device_family" = "Cyclone II"
     Info (12134): Parameter "lpm_type" = "altpll"
@@ -986,36 +1673,240 @@ Info (12133): Instantiated megafunction "vga_adapter:VGA|vga_pll:mypll|altpll:al
     Info (12134): Parameter "clk0_divide_by" = "2"
     Info (12134): Parameter "clk0_multiply_by" = "1"
     Info (12134): Parameter "clk0_duty_cycle" = "50"
-Info (12128): Elaborating entity "vga_controller" for hierarchy "vga_adapter:VGA|vga_controller:controller" File: C:/Users/DAVID/Desktop/project/vga_adapter/vga_adapter.v Line: 252
-Info (12128): Elaborating entity "datapath" for hierarchy "datapath:d0" File: C:/Users/DAVID/Desktop/project/project.v Line: 87
-Info (12128): Elaborating entity "control" for hierarchy "control:c0" File: C:/Users/DAVID/Desktop/project/project.v Line: 98
-Warning (10270): Verilog HDL Case Statement warning at project.v(193): incomplete case statement has no default case item File: C:/Users/DAVID/Desktop/project/project.v Line: 193
-Info (10264): Verilog HDL Case Statement information at project.v(193): all case item expressions in this case statement are onehot File: C:/Users/DAVID/Desktop/project/project.v Line: 193
+Info (12128): Elaborating entity "vga_controller" for hierarchy "vga_adapter:VGA|vga_controller:controller" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/vga_adapter/vga_adapter.v Line: 252
+Info (12128): Elaborating entity "frames_per_second_60" for hierarchy "frames_per_second_60:FPS" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 518
+Info (12128): Elaborating entity "clear_screen" for hierarchy "clear_screen:black_screen" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 532
+Warning (10855): Verilog HDL warning at project.v(1621): initial value for variable send_colour should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1621
+Warning (10855): Verilog HDL warning at project.v(1624): initial value for variable send_x should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1624
+Warning (10855): Verilog HDL warning at project.v(1627): initial value for variable send_y should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1627
+Warning (10034): Output port "send_colour" at project.v(1620) has no driver File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1620
+Info (12128): Elaborating entity "shape" for hierarchy "shape:Square_frame_1" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 585
+Warning (10855): Verilog HDL warning at project.v(1749): initial value for variable send_colour should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1749
+Warning (10855): Verilog HDL warning at project.v(1752): initial value for variable send_x should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1752
+Warning (10855): Verilog HDL warning at project.v(1755): initial value for variable send_y should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1755
+Warning (10034): Output port "send_colour" at project.v(1748) has no driver File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1748
+Info (12128): Elaborating entity "control" for hierarchy "control:main_control" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1509
+Warning (10240): Verilog HDL Always Construct warning at project.v(2165): inferring latch(es) for variable "is_button_pressed", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (10240): Verilog HDL Always Construct warning at project.v(2165): inferring latch(es) for variable "curr_shape_id", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (10240): Verilog HDL Always Construct warning at project.v(2165): inferring latch(es) for variable "is_square_animation_req", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (10240): Verilog HDL Always Construct warning at project.v(2165): inferring latch(es) for variable "draw_square_frame", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (10240): Verilog HDL Always Construct warning at project.v(2165): inferring latch(es) for variable "curr_shape_id_for_square", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (10240): Verilog HDL Always Construct warning at project.v(2240): inferring latch(es) for variable "draw_start", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2240
+Info (10041): Inferred latch for "draw_start[0]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[1]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[2]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[3]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[4]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[5]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[6]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[7]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[8]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[9]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[10]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[11]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[12]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[13]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[14]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[15]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[16]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[17]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "draw_start[18]" at project.v(2245) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+Info (10041): Inferred latch for "curr_shape_id_for_square[0]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[1]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[2]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[3]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[4]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[5]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[6]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[7]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[8]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[9]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id_for_square[10]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "draw_square_frame" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "is_square_animation_req" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[0]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[1]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[2]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[3]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[4]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[5]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[6]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[7]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[8]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[9]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "curr_shape_id[10]" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (10041): Inferred latch for "is_button_pressed" at project.v(2165) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Info (12128): Elaborating entity "block_detector" for hierarchy "block_detector:fff" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1542
+Warning (10036): Verilog HDL or VHDL warning at project.v(1956): object "main_curr_bottom_x_pos" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1956
+Warning (10036): Verilog HDL or VHDL warning at project.v(1957): object "main_curr_bottom_y_pos" assigned a value but never read File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1957
+Warning (10855): Verilog HDL warning at project.v(1908): initial value for variable main_bottom_corner_x_pos should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1908
+Warning (10855): Verilog HDL warning at project.v(1910): initial value for variable main_bottom_corner_y_pos should be constant File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1910
+Warning (10230): Verilog HDL assignment warning at project.v(1949): truncated value with size 11 to match size of target (1) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1949
+Warning (10230): Verilog HDL assignment warning at project.v(1951): truncated value with size 8 to match size of target (1) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1951
+Warning (10027): Verilog HDL or VHDL warning at the project.v(1965): index expression is not wide enough to address all of the elements in the array File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1965
+Warning (10027): Verilog HDL or VHDL warning at the project.v(1966): index expression is not wide enough to address all of the elements in the array File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1966
+Warning (10027): Verilog HDL or VHDL warning at the project.v(1971): index expression is not wide enough to address all of the elements in the array File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1971
+Warning (10027): Verilog HDL or VHDL warning at the project.v(1972): index expression is not wide enough to address all of the elements in the array File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1972
+Warning (10240): Verilog HDL Always Construct warning at project.v(1963): inferring latch(es) for variable "main_send_x", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1963
+Warning (10240): Verilog HDL Always Construct warning at project.v(1963): inferring latch(es) for variable "main_send_y", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1963
+Warning (10230): Verilog HDL assignment warning at project.v(1991): truncated value with size 8 to match size of target (1) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1991
+Warning (10230): Verilog HDL assignment warning at project.v(1996): truncated value with size 8 to match size of target (1) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1996
+Warning (10240): Verilog HDL Always Construct warning at project.v(1981): inferring latch(es) for variable "main_bottom_corner_x_pos", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Warning (10240): Verilog HDL Always Construct warning at project.v(1981): inferring latch(es) for variable "main_bottom_corner_y_pos", which holds its previous value in one or more paths through the always construct File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[0]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[1]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[2]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[3]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[4]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[5]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[6]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[7]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[8]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[9]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_y_pos[10]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[0]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[1]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[2]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[3]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[4]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[5]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[6]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[7]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[8]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[9]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Info (10041): Inferred latch for "main_bottom_corner_x_pos[10]" at project.v(1981) File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1981
+Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13012): Latch control:main_control|curr_shape_id[2] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[3] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|draw_square_frame File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2147
+Warning (13012): Latch control:main_control|curr_shape_id[0] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[1] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[4] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[5] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[6] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[7] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[8] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[9] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[10] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|curr_shape_id[5] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|is_square_animation_req has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2146
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|is_square_animation_req File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2146
+Warning (13012): Latch control:main_control|draw_square_frame has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2147
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|is_square_animation_req File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2146
+Warning (13012): Latch control:main_control|draw_start[9] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[1] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[13] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[10] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[6] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[2] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[14] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[8] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[4] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[0] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[12] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[7] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[11] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[3] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[15] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[16] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[17] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|draw_start[18] has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2245
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|curr_shape_id[4] File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2165
+Warning (13012): Latch control:main_control|is_button_pressed has unsafe behavior File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2049
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal control:main_control|is_square_animation_req File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 2146
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "VGA_SYNC_N" is stuck at VCC File: C:/Users/DAVID/Desktop/project/project.v Line: 30
+    Warning (13410): Pin "LEDR[0]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[1]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[2]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[3]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[4]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[5]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[6]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[7]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[8]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[9]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[10]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[11]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[12]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[13]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[14]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[15]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[16]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "LEDR[17]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 22
+    Warning (13410): Pin "VGA_SYNC_N" is stuck at VCC File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 28
+    Warning (13410): Pin "VGA_R[10]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 29
+    Warning (13410): Pin "VGA_G[10]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 30
+    Warning (13410): Pin "VGA_B[10]" is stuck at GND File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 31
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 3 registers lost all their fanouts during netlist optimizations.
-Info (144001): Generated suppressed messages file C:/Users/DAVID/Desktop/project/output_files/project.map.smsg
+Info (17049): 88 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file C:/Users/DAVID/Documents/GitHub/cscb58_project/project/output_files/project.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "KEY[2]" File: C:/Users/DAVID/Desktop/project/project.v Line: 22
-Info (21057): Implemented 256 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 15 input pins
-    Info (21059): Implemented 35 output pins
-    Info (21061): Implemented 196 logic cells
-    Info (21064): Implemented 9 RAM segments
+Warning (21074): Design contains 20 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "SW[0]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[1]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[2]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[3]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[4]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[5]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[6]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[7]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[8]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[9]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[10]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[11]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[12]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[13]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[14]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[15]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "SW[16]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 19
+    Warning (15610): No output dependent on input pin "KEY[0]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 20
+    Warning (15610): No output dependent on input pin "KEY[1]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 20
+    Warning (15610): No output dependent on input pin "KEY[2]" File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 20
+Info (21057): Implemented 2293 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 23 input pins
+    Info (21059): Implemented 56 output pins
+    Info (21061): Implemented 2183 logic cells
+    Info (21064): Implemented 30 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 649 megabytes
-    Info: Processing ended: Fri Jul 07 20:46:01 2017
-    Info: Elapsed time: 00:00:20
-    Info: Total CPU time (on all processors): 00:00:39
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 151 warnings
+    Info: Peak virtual memory: 661 megabytes
+    Info: Processing ended: Tue Jul 11 12:55:47 2017
+    Info: Elapsed time: 00:00:27
+    Info: Total CPU time (on all processors): 00:00:47
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/DAVID/Desktop/project/output_files/project.map.smsg.
+The suppressed messages can be found in C:/Users/DAVID/Documents/GitHub/cscb58_project/project/output_files/project.map.smsg.
 
 
