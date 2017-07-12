@@ -41,8 +41,10 @@ VGA_B
     // defparam VGA.BACKGROUND_IMAGE = "black.mif";
     // defparam VGA.BACKGROUND_IMAGE = "impossible_game_title_card.mif";
 	 
-	 wire [25:0] counter; // 60 FPS to Control: 0 - 833332 Positive-edged clock signals
-
+	 wire [25:0] counter;       // 60 FPS to Control: 0 - 833332 Positive-edged clock signals
+	 wire update_screen;        // Control to Block Detector
+	 wire [10:0] curr_shape_id; // Control to Block Detector
+	 
 	 // Constants:
     // Colours:
     wire [2:0] black = 3'b000;       // 3'b000 = Black
@@ -58,17 +60,18 @@ VGA_B
 	 wire [2:0] spike_colour = white;
 	 wire [2:0] block_colour = black;
 	 // Shapes: Standard dimensions
-	 wire [10:0] main_num_rows = 8'd10;
-    wire [10:0] main_num_columns = 8'd10;
-	 wire [10:0] empty_row = -1'd1;
-	 wire [10:0] display_num_rows = 11'd120;
-	 wire [10:0] display_num_columns = 11'd160;
+	 wire [10:0] main_num_rows = 8'd10;         // 10 pixels vertical
+    wire [10:0] main_num_columns = 8'd10;      // 10 pixels horizonal
+	 wire [10:0] display_num_rows = 11'd120;    // 120 pixels vertical
+	 wire [10:0] display_num_columns = 11'd160; // 160 pixels horizontal
+	 wire [10:0] empty_row = -8'd1;
     // Player: Idle position
-    wire [10:0] main_bottom_corner_x_pos = main_bottom_corner_x_pos_detector;
-
-    wire [10:0] main_bottom_corner_y_pos = main_bottom_corner_y_pos_detector;
-	 wire [10:0] main_bottom_corner_x_pos_detector;
-	 wire [10:0] main_bottom_corner_y_pos_detector;
+	 wire [10:0] main_bottom_corner_x_pos_detector; // From Block Detector
+	 wire [10:0] main_bottom_corner_y_pos_detector; // From Block Detector
+ 	 // Block Detector to each Shape (Square frame)
+    wire [10:0] main_bottom_corner_x_pos = main_bottom_corner_x_pos_detector; 
+	 // Block Detector to each Shape (Square frame)
+    wire [10:0] main_bottom_corner_y_pos = main_bottom_corner_y_pos_detector; 
     // Obstacles: y-positions
     wire [10:0] y_level [6:0];
     assign y_level[0] = 8'd90;    // HEIGHT: LOW
@@ -101,18 +104,20 @@ VGA_B
 	 assign x_level[18] = 11'd340; //           |                   |
 	 assign x_level[19] = 11'd350; //           |                   |
 	 assign x_level[20] = 11'd360; // RIGHT DISPLACEMENT: HIGH  OFFSCREEN
+	 
+	 wire [10:0] send_bottom_corner_x_pos [6:0]; // Each Shape (Square frame) to Block Detector
+	 wire [10:0] send_bottom_corner_y_pos [6:0]; // Each Shape (Square frame) to Block Detector
 	 // Increase size of the following wires if more shapes are required
     wire [17:0] draw_start;        // Control to each Shape
     wire [17:0] draw_done;         // Each Shape to Control
     wire [10:0] send_x [17:0];     // Each Shape to Control
     wire [10:0] send_y [17:0];     // Each Shape to Control
-	 wire [10:0] send_bottom_corner_x_pos [6:0];
-	 wire [10:0] ignore_send_bottom_corner_x_pos [9:0];
-	 wire [10:0] ignore_send_bottom_corner_y_pos [9:0];
-	 wire [10:0] send_bottom_corner_y_pos [6:0];
     wire [2:0] send_colour [17:0]; // Each Shape to Control
     wire [10:0] row_start [169:0]; // Each Shape to Control: 10 for each shape
     wire [10:0] row_end [169:0];   // Each Shape to Control: 10 for each shape
+	 wire [10:0] ignore_send_bottom_corner_x_pos [9:0]; // Each Shape (Obstacle) to NULL
+	 wire [10:0] ignore_send_bottom_corner_y_pos [9:0]; // Each Shape (Obstacle) to NULL
+	
 	 // Shapes: Drawing Specifications
 	 // INDEX:
 	 // Square & Block: row_start[9:0]; row_end[9:0]
@@ -489,9 +494,10 @@ VGA_B
     assign row_end[168] = 8'd10;
     assign row_start[169] = 8'd1; // ROW 10: 10 full
     assign row_end[169] = 8'd10;
-
-    // fake_VGA_adapter VGA
-	 vga_adapter VGA(
+	 
+	 // 1. vga_adapter VGA [For Actual Program]
+    // 2. fake_VGA_adapter VGA [For Modelsim Compatibility]
+	 fake_VGA_adapter VGA(
 	 // Input
 	 .resetn(resetn),
 	 .clock(CLOCK_50),
@@ -592,7 +598,7 @@ VGA_B
 					 draw_start[2]),
     .load_colour(square_colour),
     .load_bottom_corner_x_pos(main_bottom_corner_x_pos),
-    .load_bottom_corner_y_pos(main_bottom_corner_y_pos + 8'd5),
+    .load_bottom_corner_y_pos(main_bottom_corner_y_pos - 8'd5),
     .load_num_rows(main_num_rows),
     .load_num_columns(main_num_columns),
     .is_obstacle(1'd0),
@@ -645,7 +651,7 @@ VGA_B
 					 draw_start[3]),
     .load_colour(square_colour),
     .load_bottom_corner_x_pos(main_bottom_corner_x_pos),
-    .load_bottom_corner_y_pos(main_bottom_corner_y_pos + 8'd10),
+    .load_bottom_corner_y_pos(main_bottom_corner_y_pos - 8'd10),
     .load_num_rows(main_num_rows),
     .load_num_columns(main_num_columns),
     .is_obstacle(1'd0),
@@ -698,7 +704,7 @@ VGA_B
 					 draw_start[4]),
     .load_colour(square_colour),
     .load_bottom_corner_x_pos(main_bottom_corner_x_pos),
-    .load_bottom_corner_y_pos(main_bottom_corner_y_pos + 8'd15),
+    .load_bottom_corner_y_pos(main_bottom_corner_y_pos - 8'd15),
     .load_num_rows(main_num_rows),
     .load_num_columns(main_num_columns),
     .is_obstacle(1'd0),
@@ -751,7 +757,7 @@ VGA_B
 					 draw_start[5]),
     .load_colour(square_colour),
     .load_bottom_corner_x_pos(main_bottom_corner_x_pos),
-    .load_bottom_corner_y_pos(main_bottom_corner_y_pos + 8'd10),
+    .load_bottom_corner_y_pos(main_bottom_corner_y_pos - 8'd10),
     .load_num_rows(main_num_rows),
     .load_num_columns(main_num_columns),
     .is_obstacle(1'd0),
@@ -804,7 +810,7 @@ VGA_B
 					 draw_start[6]),
     .load_colour(square_colour),
     .load_bottom_corner_x_pos(main_bottom_corner_x_pos),
-    .load_bottom_corner_y_pos(main_bottom_corner_y_pos + 8'd5),
+    .load_bottom_corner_y_pos(main_bottom_corner_y_pos - 8'd5),
     .load_num_rows(main_num_rows),
     .load_num_columns(main_num_columns),
     .is_obstacle(1'd0),
@@ -1325,7 +1331,7 @@ VGA_B
 	 .send_bottom_corner_x_pos(ignore_send_bottom_corner_x_pos[7]),
 	 .send_bottom_corner_y_pos(ignore_send_bottom_corner_y_pos[7])
     );
-	 wire update_screen;
+
 	 shape Spike_4(
 	 // Input
     .clock(CLOCK_50),
@@ -1508,44 +1514,49 @@ VGA_B
 	 .send_update_screen(update_screen)
     );
 	 
-wire [10:0] curr_shape_id;
-	 block_detector fff(
-	.load_send_x({send_x[12][10:0], 
+
+	 block_detector main_block_detector(
+	 // Input
+	 .clock(CLOCK_50),
+	 .load_send_x({ // Blocks x_values
+               // send_x[<shape_id>][<x_value>]	
+	               send_x[12][10:0], 
 						send_x[11][10:0], 
 						send_x[10][10:0], 
 						send_x[9][10:0], 
 						send_x[8][10:0]}),
-	.load_send_y({send_y[12][10:0], 
+	 .load_send_y({ // Blocks y_values
+	            // send_y[<shape_id>][<x_value>]
+	               send_y[12][10:0], 
 						send_y[11][10:0], 
 						send_y[10][10:0], 
 						send_y[9][10:0], 
 						send_y[8][10:0]}),
-	.load_curr_shape_id(curr_shape_id),
-	.load_curr_bottom_x_pos({send_bottom_corner_x_pos[6][10:0],
-									send_bottom_corner_x_pos[5][10:0],
-									send_bottom_corner_x_pos[4][10:0],
-									send_bottom_corner_x_pos[3][10:0],
-									send_bottom_corner_x_pos[2][10:0],
-									send_bottom_corner_x_pos[1][10:0],
-									send_bottom_corner_x_pos[0][10:0]}),
-	.load_curr_bottom_y_pos({send_bottom_corner_y_pos[6][10:0],
-									send_bottom_corner_y_pos[5][10:0],
-									send_bottom_corner_y_pos[4][10:0],
-									send_bottom_corner_y_pos[3][10:0],
-									send_bottom_corner_y_pos[2][10:0],
-									send_bottom_corner_y_pos[1][10:0],
-									send_bottom_corner_y_pos[0][10:0]}),
-	.update_screen(update_screen),
-	.main_bottom_corner_x_pos(main_bottom_corner_x_pos_detector),
-	.main_bottom_corner_y_pos(main_bottom_corner_y_pos_detector)
-
+	 .load_curr_shape_id(curr_shape_id),
+	 .load_curr_bottom_x_pos({ // Square frames x_values
+							     // send_bottom_corner_x_pos[<shape_id>][<x_value>]		
+									  send_bottom_corner_x_pos[6][10:0],
+									  send_bottom_corner_x_pos[5][10:0],
+									  send_bottom_corner_x_pos[4][10:0],
+									  send_bottom_corner_x_pos[3][10:0],
+									  send_bottom_corner_x_pos[2][10:0],
+									  send_bottom_corner_x_pos[1][10:0],
+									  send_bottom_corner_x_pos[0][10:0]}),
+	 .load_curr_bottom_y_pos({ // Square frames y_values
+							      // send_bottom_corner_y_pos[<shape_id>][<y_value>]
+									   send_bottom_corner_y_pos[6][10:0],
+									   send_bottom_corner_y_pos[5][10:0],
+									   send_bottom_corner_y_pos[4][10:0],
+									   send_bottom_corner_y_pos[3][10:0],
+									   send_bottom_corner_y_pos[2][10:0],
+ 									   send_bottom_corner_y_pos[1][10:0],
+ 									   send_bottom_corner_y_pos[0][10:0]}),
+	 .update_screen(update_screen),
+	 // Output
+	 .main_bottom_corner_x_pos(main_bottom_corner_x_pos_detector),
+	 .main_bottom_corner_y_pos(main_bottom_corner_y_pos_detector) 
 );
 endmodule
-
-
-
-
-
 
 module fake_VGA_adapter(
 // Input
@@ -1597,19 +1608,19 @@ send_y,
 draw_done,
 );
 
-    input clock;                           // 50 MHz clock
-    input draw_start;                      // From Control: Activates drawing process
-    input [2:0] load_colour;               // Shape's colour [Pixel colour]
-    input [10:0] load_num_rows;            // X-Dimension of shape
-    input [10:0] load_num_columns;         // Y-Dimension of shape
+    input clock;                   // 50 MHz clock
+    input draw_start;              // From Control: Activates drawing process
+    input [2:0] load_colour;       // Shape's colour [Pixel colour]
+    input [10:0] load_num_rows;    // X-Dimension of shape
+    input [10:0] load_num_columns; // Y-Dimension of shape
 	 
 	 // Modify our current x_ and y_values, since we count from zero
-	 reg [10:0] curr_x_pos = -1'd1;
-    reg [10:0] curr_y_pos = -1'd1;
+	 reg [10:0] curr_x_pos = 1'd0;
+    reg [10:0] curr_y_pos = 1'd0;
 	 
 	 // Modify our X- and Y-Dimensions of the shape, since we count from zero
-    wire [10:0] num_rows = load_num_rows - 1'd1;
-    wire [10:0] num_columns = load_num_columns - 1'd1;
+    wire [10:0] num_rows = load_num_rows - 8'd1;
+    wire [10:0] num_columns = load_num_columns - 8'd1;
 	 
 	 // Starting x_value used to draw from
 	 wire [10:0] bottom_corner_x_pos = 1'd0;
@@ -1642,7 +1653,8 @@ draw_done,
             if (curr_x_pos == num_columns)
             begin
 					 // Reset the current x_value
-					 curr_x_pos = -1'd1;
+					 curr_x_pos = 1'd0;
+					 curr_x_pos = curr_x_pos - 8'd1;
 					 // Indicate that we have completed the current row
 					 row_done <= 1'd1;
 					 // Increment the total number of rows completed
@@ -1664,13 +1676,13 @@ draw_done,
                 end
 			   // Else, move on to the next column, in the current row
             else
-                curr_x_pos = curr_x_pos + 1'd1;
+                curr_x_pos <= curr_x_pos + 1'd1;
             end
 		  // Else, reset all values required to drawing the shape
         else
         begin
-            curr_x_pos <= -1'd1;
-            curr_y_pos <= -1'd1;
+            curr_x_pos <= 1'd0;
+            curr_y_pos <= 1'd0;
             row_done <= 1'd0;
             draw_done <= 1'd0;
             num_rows_done <= 1'd0;
@@ -1678,7 +1690,7 @@ draw_done,
     end
 	 
     // For every Positive-edged clock signal
-    always @ (posedge clock)
+    always @ (*)
     begin
 		  // If Control has send the signal to draw, and we have not finished drawing yet 
         if (draw_start && !draw_done)
@@ -1720,27 +1732,29 @@ send_bottom_corner_y_pos
     input [10:0] load_num_rows;            // X-Dimension of shape
     input [10:0] load_num_columns;         // Y-Dimension of shape
     input is_obstacle;                     // Indicates if given shape is an obstacle
-	 // x_value to start drawing from, based on current row number
+	 // x_values to start drawing from, based on current row number
     input [109:0] load_row_start;
-	 // x_value to stop drawing from, based on current row number 
+	 // x_values to stop drawing from, based on current row number 
     input [109:0] load_row_end; 
 	 
 	 // Modify our current x_ and y_values, since we count from zero
-	 reg [10:0] curr_x_pos = -1'd1;
-    reg [10:0] curr_y_pos = -1'd1;
+	 reg [10:0] curr_x_pos = 1'd0;
+    reg [10:0] curr_y_pos = 1'd0;
 	 
 	 // Modify our X- and Y-Dimensions of the shape, since we count from zero
-    wire [10:0] num_rows = load_num_rows - 1'd1;
-    wire [10:0] num_columns = load_num_columns - 1'd1;
+    wire [10:0] num_rows = load_num_rows;
+    wire [10:0] num_columns = load_num_columns - 8'd1;
 	 
 	 // Starting x_value used to draw from
 	 wire [10:0] bottom_corner_x_pos = load_bottom_corner_x_pos;
-	 output [10:0] send_bottom_corner_x_pos = bottom_corner_x_pos;
+	 output reg [10:0] send_bottom_corner_x_pos;
+	 initial send_bottom_corner_x_pos = bottom_corner_x_pos;
 	 // Starting y_value used to draw from. Note that (0, 0) is at top left corner of display.
 	 wire [10:0] bottom_corner_y_pos = load_bottom_corner_y_pos - load_num_rows;
-	 output [10:0] send_bottom_corner_y_pos = bottom_corner_y_pos;
+	 output reg [10:0] send_bottom_corner_y_pos;
+	 initial send_bottom_corner_y_pos = bottom_corner_y_pos;
 	 
-	 	 // Increment size to move a shape right-to-left across the display. Applies only to 
+	 // Increment size to move a shape right-to-left across the display. Applies only to 
 	 // obstacle shapes
 	 reg [10:0] move = 8'd0;
 	 
@@ -1801,7 +1815,8 @@ send_bottom_corner_y_pos
             if (curr_x_pos == num_columns)
             begin
 					 // Reset the current x_value
-					 curr_x_pos = -1'd1;
+					 curr_x_pos = 1'd0;
+					 curr_x_pos = curr_x_pos - 8'd1;
 					 // Indicate that we have completed the current row
 					 row_done <= 1'd1;
 					 // Increment the total number of rows completed
@@ -1828,13 +1843,13 @@ send_bottom_corner_y_pos
                 end
 			   // Else, move on to the next column, in the current row
             else
-                curr_x_pos = curr_x_pos + 1'd1;
+                curr_x_pos <= curr_x_pos + 1'd1;
             end
 		  // Else, reset all values required to drawing the shape
         else
         begin
-            curr_x_pos <= -1'd1;
-            curr_y_pos <= -1'd1;
+            curr_x_pos = 1'd0;
+            curr_y_pos <= 1'd0;
             row_done <= 1'd0;
             draw_done <= 1'd0;
             num_rows_done <= 1'd0;
@@ -1842,7 +1857,7 @@ send_bottom_corner_y_pos
     end
 	 
     // For every Positive-edged clock signal
-    always @ (posedge clock)
+    always @ (*)
     begin
 		  // If Control has send the signal to draw, and we have not finished drawing yet 
         if (draw_start && !draw_done)
@@ -1881,32 +1896,37 @@ send_counter);
       	     send_counter <= 25'd833332;
 			// Else, decrement the counter's value
          else
-      	     send_counter <= send_counter - 1'd1;
+      	     send_counter <= send_counter - 8'd1;
     end
 endmodule
 
 module block_detector(
-	load_send_x,
-	load_send_y,
-	load_curr_shape_id,
-	load_curr_bottom_x_pos,
-	load_curr_bottom_y_pos,
-	update_screen,
-	
-	main_bottom_corner_x_pos,
-	main_bottom_corner_y_pos
-
+// Input
+clock,
+load_send_x,
+load_send_y,
+load_curr_shape_id,
+load_curr_bottom_x_pos,
+load_curr_bottom_y_pos,
+update_screen,
+// Output
+main_bottom_corner_x_pos,
+main_bottom_corner_y_pos
 );
-	input [54:0] load_send_x; // Current x_value for current block being drawn
-	input [54:0] load_send_y; // Current y_value for current block being drawn
+
+	input clock;
+	input [54:0] load_send_x;        // Current x_value for current block being drawn
+	input [54:0] load_send_y;        // Current y_value for current block being drawn
 	input [10:0] load_curr_shape_id; // Current shape that is being drawn
 	// Current x_value for current square frame being drawn
 	input [76:0] load_curr_bottom_x_pos; 
 	// Current y_value for current square frame being drawn
 	input [76:0] load_curr_bottom_y_pos;
-	output reg [10:0] main_bottom_corner_x_pos; // IDLE square frame's x_value
+	wire [10:0] orig_bottom_corner_x_pos = 8'd50; // IDLE square frame's original x_value
+   wire [10:0] orig_bottom_corner_y_pos = 8'd90; // IDLE square frame's original y_value
+	output reg [10:0] main_bottom_corner_x_pos;   // IDLE square frame's x_value
 	initial main_bottom_corner_x_pos = orig_bottom_corner_x_pos;
-	output reg [10:0] main_bottom_corner_y_pos; // IDLE square frame's y_value
+	output reg [10:0] main_bottom_corner_y_pos;   // IDLE square frame's y_value
 	initial main_bottom_corner_y_pos = orig_bottom_corner_y_pos;
 	// Reassign each square frame's current sending x_value. 
 	// Allows for easier access to x_values
@@ -1942,20 +1962,21 @@ module block_detector(
 	assign send_y[2] = load_send_y[32:22]; // Block_3
 	assign send_y[3] = load_send_y[43:33]; // Block_4 
 	assign send_y[4] = load_send_y[54:44]; // Block_5
-   		
-	wire [10:0] orig_bottom_corner_x_pos = 8'd50; // IDLE square frame's original x_value
-   wire [10:0] orig_bottom_corner_y_pos = 8'd90; // IDLE square frame's original y_value
+	
 	// Determines current square frame being drawn
-	wire curr_shape_id = load_curr_shape_id - 1'd1;
+	wire curr_shape_id = load_curr_shape_id - 8'd1;
 	// Determines current block being drawn
 	wire block_curr_shape_id = curr_shape_id - 8'd8;
-	reg num_hit = 1'd0; // Number of times a square frame has hit a block [pixel-wise]
-	reg size_increase = 1'd0;
+	reg num_hit = 1'd0;       // Number of times a square frame has hit a block [pixel-wise]
+	reg size_increase = 1'd0; // Square frame y_(shift)_value
+	// Current Block's x_ and y_values
 	reg [10:0] main_send_x;
 	reg [10:0] main_send_y;
+	// Current Square frame's x_ and y_values
 	reg [10:0] main_curr_bottom_x_pos;
 	reg [10:0] main_curr_bottom_y_pos;
 	input update_screen;
+	
 	// When a variable inside this always block is changed
 	always @ (*)
 	begin
@@ -1988,15 +2009,16 @@ module block_detector(
 	    // If there were any block collisions
 	    if (num_hit > 0)
 			  begin
-			  size_increase <= size_increase + 8'd10;
+			  size_increase <= size_increase + 8'd10; // Increase shift value
+			  // Modify IDLE Square frame's original x_ and y_values
 		     main_bottom_corner_x_pos <= orig_bottom_corner_x_pos + size_increase;
 			  main_bottom_corner_y_pos <= orig_bottom_corner_y_pos + size_increase;
 			  end
-		 else if ((orig_bottom_corner_x_pos + size_increase) != orig_bottom_corner_x_pos)
-			  size_increase <= size_increase - 8'd10;
-		 num_hit <= 1'd0;
+		 // Else, if it is possible to reduce the shift value
+		 else if (size_increase != 1'd0)
+			  size_increase <= size_increase - 8'd10; // Reduce the shift value
+		 num_hit <= 1'd0; // Reset the hit counter
 	end
-
 endmodule
 
 module control(
@@ -2017,7 +2039,7 @@ send_curr_shape_id,
 send_update_screen
 );
 
-	input clock; // 50 MHz clock
+	input clock;               // 50 MHz clock
 	input [25:0] load_counter; // From 60 FPS: Holds the current counter's value
 	input load_button_pressed; // From KEY[3]: Holds the button's current position
 	// From each shape: Holds each shape's status on if they have finish drawing their shape
@@ -2037,14 +2059,14 @@ send_update_screen
 	output reg [10:0] send_y_VGA;
 	// To VGA: Sends the colour of the pixel to display
 	output reg [2:0] send_colour_VGA;
+	// Indicates when the screen should be updated [based on the 60 FPS counter]
+	reg update_screen = 1'd1;
+	output reg send_update_screen;
+   initial send_update_screen	= update_screen; // Control to Block Detector
 	
 	// Constants to indicate when the draw signal is ON or OFF
 	reg draw_start_on = 1'd1;
 	reg draw_start_off = 1'd0;
-
-	// Indicates when the screen should be updated [based on the 60 FPS counter]
-	reg update_screen = 1'd1;
-	output send_update_screen = update_screen;
 	// Indicates when a button has been pressed
 	reg is_button_pressed = 1'd0;
 	
@@ -2138,15 +2160,16 @@ send_update_screen
 	 
    // Used to cycle through each shape ID
 	reg [10:0] curr_shape_id = 8'd0;
-	output [10:0] send_curr_shape_id = curr_shape_id;
+	output reg [10:0] send_curr_shape_id;
+	initial send_curr_shape_id = curr_shape_id; // Control to Block Detector
 	// Used to cycle through each shape ID referring to the square animation
 	reg [10:0] curr_shape_id_for_square = 8'd1;
-	// Holds the draw done signal from the current shape ID
-	reg main_draw_done;
+	reg main_draw_done; // Holds the draw done signal from the current shape ID
 	reg is_square_animation_req = 1'd0;
 	reg draw_square_frame = 1'd0;
+	
 	// When a variable inside this always block is changed
-	always @ (*)
+	always @ (posedge clock)
 	begin
 		 // If the counter has the value of zero
 		 if (load_counter == 25'd0)
@@ -2155,11 +2178,12 @@ send_update_screen
 		 // Else, the screen does not need to be updated
 		 else
 			  update_screen <= 1'd0;
+		 send_update_screen <= update_screen;
 	end
 
 	
 	// When a variable inside this always block is changed
-	always @ (*)
+	always @ (posedge clock)
 	begin
 	    // If the button has been pressed [Logic-0 => Pressed]
 		 if (!load_button_pressed)
@@ -2175,8 +2199,6 @@ send_update_screen
 			begin
 			   // The square animation is required
 				is_square_animation_req <= 1'd1;
-				// Allows for 1 square frame to be drawn for this round of update screen
-				draw_square_frame <= 1'd0;
 			end
 		 end
 		 // If the screen has been cleared [OR] the 1 square frame to be drawn for this round
@@ -2216,7 +2238,7 @@ send_update_screen
 		 end
 		 // Else, if the current obstacle has been drawn, and there are more obstacles to be
 		 // drawn
-		 else if (main_draw_done && (curr_shape_id != shape[18]))
+		 else if (main_draw_done && (curr_shape_id != shape[18]) && !draw_square_frame)
 		     // Move to the next obstacle to display
 			  curr_shape_id <= curr_shape_id + 1'd1;  
 
