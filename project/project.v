@@ -58,7 +58,7 @@ VGA_B
 	 // Shapes: Colour designations
 	 wire [2:0] square_colour = red;
 	 wire [2:0] spike_colour = white;
-	 wire [2:0] block_colour = black;
+	 wire [2:0] block_colour = yellow;
 	 // Shapes: Standard dimensions
 	 wire [10:0] main_num_rows = 8'd10;         // 10 pixels vertical
     wire [10:0] main_num_columns = 8'd10;      // 10 pixels horizonal
@@ -914,7 +914,7 @@ VGA_B
     .draw_start(
 		       // draw_start[<shape_id>]
 					 draw_start[8]),
-    .load_colour(white),
+    .load_colour(block_colour),
     .load_bottom_corner_x_pos(x_level[0]),
     .load_bottom_corner_y_pos(y_level[0]),
     .load_num_rows(main_num_rows),
@@ -1629,7 +1629,20 @@ draw_done,
 	 
 	 // To Control: Sends shape's colour [Pixel colour]
 	 output reg [2:0] send_colour;
-	 initial send_colour = load_colour; 
+	 always@(posedge clock)
+	 begin
+			case (load_colour)
+			3'b000: send_colour = 3'b000;  // 3'b000 = Black
+			3'b001: send_colour = 3'b001;  // 3'b001 = Dark Blue
+			3'b010: send_colour = 3'b010;  // 3'b010 = Light Green
+			3'b011: send_colour = 3'b011;  // 3'b011 = Light Blue
+			3'b100: send_colour = 3'b100;  // 3'b100 = Red
+			3'b101: send_colour = 3'b101;  // 3'b101 = Pink
+			3'b110: send_colour = 3'b110;  // 3'b110 = Yellow
+		   3'b111: send_colour = 3'b111;  // 3'b111 = White
+			default: send_colour = 3'b101; // 3'b101 = Pink
+			endcase
+	 end
 	 // To Control: Sends shape's current x_value
     output reg [10:0] send_x;
 	 initial send_x = bottom_corner_x_pos + curr_x_pos;
@@ -1758,9 +1771,23 @@ send_bottom_corner_y_pos
 	 // obstacle shapes
 	 reg [10:0] move = 8'd0;
 	 
-	 // To Control: Sends shape's colour [Pixel colour]
+	 // To Control: Sends shape's colour [Pixel colour] 
 	 output reg [2:0] send_colour;
-	 initial send_colour = load_colour; 
+	 always@(posedge clock)
+	 begin
+			case (load_colour)
+			3'b000: send_colour = 3'b000;  // 3'b000 = Black
+			3'b001: send_colour = 3'b001;  // 3'b001 = Dark Blue
+			3'b010: send_colour = 3'b010;  // 3'b010 = Light Green
+			3'b011: send_colour = 3'b011;  // 3'b011 = Light Blue
+			3'b100: send_colour = 3'b100;  // 3'b100 = Red
+			3'b101: send_colour = 3'b101;  // 3'b101 = Pink
+			3'b110: send_colour = 3'b110;  // 3'b110 = Yellow
+		   3'b111: send_colour = 3'b111;  // 3'b111 = White
+			default: send_colour = 3'b101; // 3'b101 = Pink
+			endcase
+	 end
+	 
 	 // To Control: Sends shape's current x_value
     output reg [10:0] send_x;
 	 initial send_x = bottom_corner_x_pos + curr_x_pos + move;
