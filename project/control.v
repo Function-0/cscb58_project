@@ -174,10 +174,10 @@ draw_start
 			 begin
 			    // Reset all shapes positions
 				 for (i = 0; i < 18; i = i + 1)
+				 begin
 					 reset[i] <= 1'd1;
-				 // Do not allow any modules to be drawn
-				 for (i = 0; i < 18; i = i + 1)
-				    draw_start[i] <= 1'd0;
+					 draw_start[i] <= 1'd0; // Do not allow any modules to be drawn
+				 end
 		    end
 		 end
 		 else if (load_start_switch && !game_previous_state)
