@@ -6,6 +6,7 @@ load_curr_shape_id,
 load_block_bottom_left_corner_x_pos,
 load_block_bottom_left_corner_y_pos,
 update_screen,
+load_move_counter,
 // Output
 square_bottom_left_corner_x_pos,
 square_bottom_left_corner_y_pos
@@ -14,6 +15,7 @@ square_bottom_left_corner_y_pos
 	input clock;
 	input reset;
 	input update_screen;
+	input [10:0] load_move_counter;
 	input [10:0] load_curr_shape_id;
 	input [54:0] load_block_bottom_left_corner_x_pos; 
 	input [54:0] load_block_bottom_left_corner_y_pos;
@@ -79,7 +81,7 @@ square_bottom_left_corner_y_pos
 			 begin
 					main_square_bottom_left_corner_y_pos <= main_square_bottom_left_corner_y_pos + 8'd10;
 			 end
-			 move <= move + 8'd2;
+			 move <= move + load_move_counter;
 		 end
 		 for (i = 0; i < 5; i = i + 1)
 		 begin
