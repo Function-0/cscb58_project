@@ -203,6 +203,7 @@ VGA_B
 	 
 	 wire [10:0] test_x;
 	 wire [10:0] test_y;
+	 wire [10:0] move_counter = 8'd5;
 	 
 	 block_detector main_block_detector(
 	 .clock(CLOCK_50),
@@ -219,6 +220,7 @@ VGA_B
 														send_bottom_left_corner_y_pos[8][10:0],
 														send_bottom_left_corner_y_pos[7][10:0]}),
 	 .update_screen(update_screen),
+	 .load_move_counter(move_counter),
 	 .square_bottom_left_corner_x_pos(test_x),
 	 .square_bottom_left_corner_y_pos(test_y)
 	 );
@@ -312,13 +314,14 @@ VGA_B
 	 
 	 shape Square_frame_1(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[0]),
     .draw_start(draw_start[0]),
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
-    .load_bottom_left_corner_x_pos(square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(square_bottom_left_corner_y_pos),
+    .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
+    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -352,13 +355,14 @@ VGA_B
 	 
 	 shape Square_frame_2(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[1]),
     .draw_start(draw_start[1]),
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
-    .load_bottom_left_corner_x_pos(square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(square_bottom_left_corner_y_pos - 8'd5),
+    .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
+    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd5),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -392,13 +396,14 @@ VGA_B
 	 
 	 shape Square_frame_3(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[2]),
     .draw_start(draw_start[2]),
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
-    .load_bottom_left_corner_x_pos(square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(square_bottom_left_corner_y_pos - 8'd10),
+    .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
+    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd10),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -432,13 +437,14 @@ VGA_B
 	 
 	 shape Square_frame_4(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[3]),
     .draw_start(draw_start[3]),
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
-    .load_bottom_left_corner_x_pos(square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(square_bottom_left_corner_y_pos - 8'd15),
+    .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
+    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd15),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -472,13 +478,14 @@ VGA_B
 	 
 	 shape Square_frame_5(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[4]),
     .draw_start(draw_start[4]),
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
-    .load_bottom_left_corner_x_pos(square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(square_bottom_left_corner_y_pos - 8'd10),
+    .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
+    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd10),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -512,13 +519,14 @@ VGA_B
 	 
 	 shape Square_frame_6(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[5]),
     .draw_start(draw_start[5]),
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
-    .load_bottom_left_corner_x_pos(square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(square_bottom_left_corner_y_pos - 8'd5),
+    .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
+    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd5),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -552,13 +560,14 @@ VGA_B
 	 
 	 shape Square_frame_7(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[6]),
     .draw_start(draw_start[6]),
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
-    .load_bottom_left_corner_x_pos(square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(square_bottom_left_corner_y_pos),
+    .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
+    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -592,6 +601,7 @@ VGA_B
 	 
 	 shape Block_1(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[7]),
     .draw_start(draw_start[7]),
@@ -632,6 +642,7 @@ VGA_B
 	 
 	 shape Block_2(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[8]),
     .draw_start(draw_start[8]),
@@ -672,6 +683,7 @@ VGA_B
 	 
 	 shape Block_3(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[9]),
     .draw_start(draw_start[9]),
@@ -712,6 +724,7 @@ VGA_B
 	 
 	 shape Block_4(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[10]),
     .draw_start(draw_start[10]),
@@ -752,6 +765,7 @@ VGA_B
 	 
 	 shape Block_5(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[11]),
     .draw_start(draw_start[11]),
@@ -792,6 +806,7 @@ VGA_B
 	 
 	 shape Spike_1(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[12]),
     .draw_start(draw_start[12]),
@@ -832,6 +847,7 @@ VGA_B
 	 
 	 shape Spike_2(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[13]),
     .draw_start(draw_start[13]),
@@ -872,6 +888,7 @@ VGA_B
 	 
 	 shape Spike_3(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[14]),
     .draw_start(draw_start[14]),
@@ -912,6 +929,7 @@ VGA_B
 	 
 	 shape Spike_4(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[15]),
     .draw_start(draw_start[15]),
@@ -952,6 +970,7 @@ VGA_B
 	 
 	 shape Spike_5(
 	 // Input
+	 .load_move_counter(move_counter),
     .clock(CLOCK_50),
 	 .reset(reset[16]),
     .draw_start(draw_start[16]),
