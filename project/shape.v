@@ -1,5 +1,6 @@
 module shape(
 // Input
+load_move_counter,
 clock,
 reset,
 draw_start,
@@ -19,7 +20,8 @@ send_y,
 send_bottom_left_corner_x_pos,
 send_bottom_left_corner_y_pos
 );
-
+    
+	 input [10:0] load_move_counter;
     input clock; 
 	 input reset;	 
     input draw_start;                           
@@ -49,6 +51,7 @@ send_bottom_left_corner_y_pos
 	 reg [10:0] move = 1'd0;
 	 reg [10:0] num_rows_done = 1'd0;
 	 reg [10:0] bottom_left_corner_y_pos_minus_9_pixels;
+	 reg [10:0] shape_out_of_bounds_calculation = 1'd0;
 	 
 	 initial send_bottom_left_corner_x_pos = load_bottom_left_corner_x_pos;
 	 initial send_bottom_left_corner_y_pos = load_bottom_left_corner_y_pos;
@@ -112,8 +115,10 @@ send_bottom_left_corner_y_pos
 	 always @ (posedge clock) 
     begin
 	     if (reset && is_obstacle)
+		  begin
 				move = 1'd0; // DO NOT MODIFY
 				shape_out_of_bounds = 1'd0; // DO NOT MODIFY
+		  end
         if (draw_start && !draw_done) 
             begin
             if (curr_x_pos == load_num_pixels_horizontal)
@@ -123,14 +128,17 @@ send_bottom_left_corner_y_pos
 					 if (num_rows_done == load_num_pixels_vertical)
 					 begin
 						  draw_done <= 1'd1;
+						  shape_out_of_bounds_calculation <= load_bottom_left_corner_x_pos - move;
 						  if (is_obstacle)
-								move = move + 8'd2; // DO NOT MODIFY
+								move = move + load_move_counter; // DO NOT MODIFY
 						  // Verilog stores values unsigned:
 						  // -1 <=> 11'd2048
 						  // -48 <=> 11'd2000
 					  // if ((load_bottom_left_corner_x_pos - move) < 1'd0    )
-						  if ((load_bottom_left_corner_x_pos - move) > 11'd2000)
+						  if (shape_out_of_bounds_calculation > 11'd2000)
 							   shape_out_of_bounds = 1'd1;
+//						  if (shape_out_of_bounds_calculation > 11'd0)
+//							   shape_out_of_bounds = 1'd1;
 					 end
 					 curr_x_pos <= 1'd0; // Reset current x_value
             end
