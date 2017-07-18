@@ -20,12 +20,12 @@ send_counter);
 	 // 50,000,000 / 10 [FPS] = 5000000
 	 // 50,000,000 /  5 [FPS] = 10000000
 	 // 50,000,000 /  1 [FPS] = 50000000
-    output reg [24:0] send_counter = 25'd10000000;
+    output reg [24:0] send_counter = 25'd21000;//25'd10000000;
 	 
     always @ (posedge clock)
     begin
          if (send_counter == 1'd0)
-      	    send_counter <= 25'd10000000;
+      	    send_counter <= 25'd21000;//25'd10000000;
          else
       	    send_counter <= send_counter - 1'd1;
     end
