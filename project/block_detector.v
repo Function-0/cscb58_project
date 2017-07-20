@@ -75,9 +75,11 @@ square_bottom_left_corner_y_pos
 			 end
 			 // As y -> infinity, pixel goes down
 			 // As y -> 0, pixel goes up
-			 if (!(((block_bottom_left_corner_x_pos[main_block] - move) >= main_square_bottom_left_corner_x_pos) &&
-				 	 ((block_bottom_left_corner_x_pos[main_block] - move) <= (main_square_bottom_left_corner_x_pos + 8'd9))) &&
-					main_square_bottom_left_corner_y_pos < orig_square_bottom_left_corner_y_pos)
+			 if ( !(
+			       ((block_bottom_left_corner_x_pos[main_block] - move) >= main_square_bottom_left_corner_x_pos - 8'd9) &&
+			       ((block_bottom_left_corner_x_pos[main_block] - move) <= (main_square_bottom_left_corner_x_pos + 8'd9))
+					 ) &&
+					  (main_square_bottom_left_corner_y_pos < orig_square_bottom_left_corner_y_pos))
 			 begin
 					main_square_bottom_left_corner_y_pos <= main_square_bottom_left_corner_y_pos + 8'd10;
 			 end
@@ -85,15 +87,15 @@ square_bottom_left_corner_y_pos
 		 end
 		 for (i = 0; i < 5; i = i + 1)
 		 begin
-			 if ((((block_bottom_left_corner_x_pos[i] - move) >= main_square_bottom_left_corner_x_pos) &&
-				  ((block_bottom_left_corner_x_pos[i] - move) <= (main_square_bottom_left_corner_x_pos + 8'd9))) ||
-				  (((block_bottom_left_corner_x_pos[i] - move) >= main_square_bottom_left_corner_x_pos - 8'd9) &&
-				  ((block_bottom_left_corner_x_pos[i] - move) <= (main_square_bottom_left_corner_x_pos))) &&
+			 if ( (
+			      ((block_bottom_left_corner_x_pos[i] - move) >= main_square_bottom_left_corner_x_pos - 8'd9) &&
+			      ((block_bottom_left_corner_x_pos[i] - move) <= (main_square_bottom_left_corner_x_pos + 8'd9))
+					) &&
 				    !modify_square_pos_up)
 				  begin
 				  if (block_bottom_left_corner_y_pos[i] == main_square_bottom_left_corner_y_pos)
 					   modify_square_pos_up <= 1'd1;
-						main_block = i;
+				      main_block = i;
 				  end
 		 end
 	end

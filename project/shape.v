@@ -34,10 +34,10 @@ send_bottom_left_corner_y_pos
     input [10:0] load_num_pixels_horizontal;    // X-Dimension of shape
     input [109:0] load_pixel_draw_start_pos;    // For each row of the shape
     input [109:0] load_pixel_draw_end_pos; 
-	 input [25:0] load_max_counter_value;
+	 input [49:0] load_max_counter_value;
 	 
-	 reg [25:0] max_counter_value;
-	 initial max_counter_value = load_max_counter_value;
+	 reg [49:0] max_counter_value = 1'd0;
+	 reg begin_drawing = 1'd0;
 	 
 	 output reg draw_done = 1'd0; 
 	 output reg [2:0] send_colour;
@@ -103,12 +103,6 @@ send_bottom_left_corner_y_pos
 			endcase
 	 end
 	 
-	 always @ (posedge clock)
-    begin
-         if (max_counter_value != 1'd0)
-      	    max_counter_value <= max_counter_value - 1'd1;
-	 end
-	 
 	 // Updates calculation
     always @ (*)
     begin
@@ -129,8 +123,16 @@ send_bottom_left_corner_y_pos
 		  begin
 				move = 1'd0; // DO NOT MODIFY
 				shape_out_of_bounds = 1'd0; // DO NOT MODIFY
+				begin_drawing = 1'd0; // DO NOT MODIFY
+				max_counter_value = 1'd0; // DO NOT MODIFY
 		  end
-        if (draw_start && !draw_done && (max_counter_value == 1'd0)) 
+		  if (max_counter_value != load_max_counter_value)
+      	    max_counter_value = max_counter_value + 1'd1;
+		  else
+				 begin_drawing = 1'd1;
+		  if (draw_start && !draw_done && !begin_drawing)
+			  draw_done <= 1'd1;
+        else if (draw_start && !draw_done && begin_drawing) 
             begin
             if (curr_x_pos == load_num_pixels_horizontal)
             begin
@@ -171,7 +173,7 @@ send_bottom_left_corner_y_pos
         if (draw_start && !draw_done && !shape_out_of_bounds)
         begin
             if ((curr_x_pos >= row_start[curr_y_pos]) &&
-                (curr_x_pos <= row_end[curr_y_pos]))
+                (curr_x_pos <= row_end[curr_y_pos]) && begin_drawing)
             begin
 				send_x <= load_bottom_left_corner_x_pos + curr_x_pos - move;
 			   send_y <= bottom_left_corner_y_pos_minus_9_pixels + curr_y_pos;

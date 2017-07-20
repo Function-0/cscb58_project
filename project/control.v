@@ -16,8 +16,7 @@ main_send_x,
 main_send_y,
 send_curr_shape_id,
 reset,
-draw_start,
-send_attempts
+draw_start
 );
 
 	input clock;     
@@ -37,7 +36,6 @@ send_attempts
 	output reg [10:0] send_curr_shape_id;
 	output reg [17:0] reset;
 	output reg [17:0] draw_start;
-	output reg [7:0] send_attempts;
 	
 	wire [2:0] send_colour [17:0];
 	wire [10:0] send_x [17:0];
@@ -56,7 +54,6 @@ send_attempts
 	reg [10:0] curr_shape_id = 8'd17;
 	reg [10:0] curr_shape_id_for_square = 8'd0;
 	reg [10:0] square_frame_delay_counter = 1'd0;
-	reg [7:0] load_attempts;
 	
    initial send_update_screen	= update_screen; 
 	initial send_curr_shape_id = curr_shape_id; 
@@ -154,7 +151,6 @@ send_attempts
 	begin
 	    send_update_screen <= update_screen;
 		 send_curr_shape_id <= curr_shape_id;
-		 send_attempts <= load_attempts;
 	end
 
 	// Determines which shape to draw next
@@ -164,13 +160,6 @@ send_attempts
 		 begin
 			 if (game_previous_state)
 			 begin
-				if (load_attempts[3:0] == 4'd9)
-					begin
-						load_attempts[3:0] <= 4'd0;
-						load_attempts[7:4] <= load_attempts[7:4] + 1'd1;
-					end
-				 else 
-					load_attempts[3:0] <= load_attempts + 1'd1;
 				 // Clear the screen
 				 curr_shape_id <= shape[17]; // Black_screen
 				 draw_start[17] <= 1'd1;

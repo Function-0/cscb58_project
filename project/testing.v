@@ -34,16 +34,15 @@ VGA_B
     wire resetn = SW[17]; // To VGA: Active logic-0
 	 wire writeEn;         // Control to VGA
 	 // VGA Adapter Parameters:
-    defparam VGA.RESOLUTION = "160x120";
-    defparam VGA.MONOCHROME = "FALSE";
-    defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
+    // defparam VGA.RESOLUTION = "160x120";
+    // defparam VGA.MONOCHROME = "FALSE";
+    // defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
     // defparam VGA.BACKGROUND_IMAGE = "black.mif";
-    defparam VGA.BACKGROUND_IMAGE = "impossible_game_title_card.mif";
+    // defparam VGA.BACKGROUND_IMAGE = "impossible_game_title_card.mif";
 	 
 	 wire [24:0] counter;       // FPS to Control
 	 wire update_screen;        // Control to Block Detector
 	 wire [10:0] curr_shape_id; // Control to Block Detector
-	 wire [7:0] out_attempts;
 	 
 	 // Constants:
     // Colours:
@@ -59,6 +58,8 @@ VGA_B
 	 wire [2:0] square_colour = red;
 	 wire [2:0] spike_colour = white;
 	 wire [2:0] block_colour = yellow;
+	 wire [2:0] checkmark_colour = light_blue;
+	 wire [2:0] x_symbol_colour = light_blue;
 	 // Shapes: Standard dimensions
 	 wire [10:0] shape_num_pixels_vertical = 8'd9;        // 10 pixels vertical
     wire [10:0] shape_num_pixels_horizontal = 8'd9;      // 10 pixels horizonal
@@ -109,8 +110,8 @@ VGA_B
     wire [10:0] send_x [17:0];     // Each Shape to Control
     wire [10:0] send_y [17:0];     // Each Shape to Control
     wire [2:0] send_colour [17:0]; // Each Shape to Control
-    wire [10:0] row_start [129:0]; // Each Shape to Control: 10 for each shape
-    wire [10:0] row_end [129:0];   // Each Shape to Control: 10 for each shape
+    wire [10:0] row_start [49:0]; // Each Shape to Control: 10 for each shape
+    wire [10:0] row_end [49:0];   // Each Shape to Control: 10 for each shape
 	 wire [10:0] send_bottom_left_corner_x_pos [16:0]; // Each Shape to detectors
 	 wire [10:0] send_bottom_left_corner_y_pos [16:0]; // Each Shape to detectors
 	
@@ -118,21 +119,9 @@ VGA_B
 	 // INDEX:
 	 // Square & Block: row_start[9:0]; row_end[9:0]
 	 // Spike: row_start[19:10]; row_end[19:10]
-	 // SPARE[0]: row_start[29:20]; row_end[29:20]
-	 // SPARE[1]: row_start[39:30]; row_end[39:30]
-	 // SPARE[2]: row_start[49:40]; row_end[49:40]
-	 // SPARE[3]: row_start[59:50]; row_end[59:50]
-	 // SPARE[4]: row_start[69:60]; row_end[69:60]
-	 // SPARE[5]: row_start[79:70]; row_end[79:70]
-	 // SPARE[6]: row_start[89:80]; row_end[89:80]
-	 // SPARE[7]: row_start[99:90]; row_end[99:90]
-	 // SPARE[8]: row_start[109:100]; row_end[109:100]
-	 // SPARE[9]: row_start[119:110]; row_end[119:110]
-	 // SPARE[10]: row_start[129:120]; row_end[129:120]
-	 // SPARE[11]: row_start[139:130]; row_end[139:130]
-	 // SPARE[12]: row_start[149:140]; row_end[149:140]
-	 // SPARE[13]: row_start[159:150]; row_end[159:150]
-    // SPARE[14]: row_start[169:160]; row_end[169:160]
+	 // Checkmark: row_start[29:20]; row_end[29:20]
+	 // X Symbol [2 Parts]: Left side: row_start[39:30]; row_end[39:30]
+	 // X Symbol [2 Parts]: Right side: row_start[49:40]; row_end[49:40]
 	 // Square & Block: 
     assign row_start[0] = 8'd0; // ROW 1: 10 full
     assign row_end[0] = 8'd9;
@@ -175,8 +164,71 @@ VGA_B
     assign row_end[18] = 8'd9;
     assign row_start[19] = 8'd0; // ROW 10: 10 full
     assign row_end[19] = 8'd9;
+	 // Checkmark:
+	 assign row_start[20] = empty_row_of_pixels; // ROW 1: 10 blank
+    assign row_end[20] = empty_row_of_pixels;
+    assign row_start[21] = 8'd9; // ROW 2: 9 blank, 1 full
+    assign row_end[21] = 8'd9; 
+    assign row_start[22] = 8'd8; // ROW 3: 8 blank, 2 full
+    assign row_end[22] = 8'd9;
+    assign row_start[23] = 8'd7; // ROW 4: 7 blank, 3 full
+    assign row_end[23] = 8'd9;
+    assign row_start[24] = 8'd6; // ROW 5: 6 blank, 3 full, 1 blank
+    assign row_end[24] = 8'd8;
+    assign row_start[25] = 8'd5; // ROW 6: 5 blank, 3 full, 2 blank
+    assign row_end[25] = 8'd7;
+    assign row_start[26] = 8'd4; // ROW 7: 4 blank, 3 full, 3 blank
+    assign row_end[26] = 8'd6;
+    assign row_start[27] = 8'd0; // ROW 8: 6 full, 4 blank
+    assign row_end[27] = 8'd5;
+    assign row_start[28] = 8'd1; // ROW 9: 1 blank, 4 full, 5 blank
+    assign row_end[28] = 8'd4;
+    assign row_start[29] = 8'd2; // ROW 10: 2 blank, 2 full, 6 blank
+    assign row_end[29] = 8'd3;
+	 // X symbol [2 Parts]: Left side
+	 assign row_start[30] = 8'd0; // ROW 1: 2 full, 8 blank
+    assign row_end[30] = 8'd1;
+    assign row_start[31] = 8'd0; // ROW 2: 3 full, 7 blank
+    assign row_end[31] = 8'd2; 
+    assign row_start[32] = 8'd1; // ROW 3: 1 blank, 3 full, 6 blank
+    assign row_end[32] = 8'd3;
+    assign row_start[33] = 8'd2; // ROW 4: 2 blank, 3 full, 5 blank
+    assign row_end[33] = 8'd4;
+    assign row_start[34] = 8'd3; // ROW 5: 3 blank, 2 full, 5 blank
+    assign row_end[34] = 8'd4;
+    assign row_start[35] = 8'd3; // ROW 6: 3 blank, 2 full, 5 blank
+    assign row_end[35] = 8'd4;
+    assign row_start[36] = 8'd2; // ROW 7: 2 blank, 3 full, 5 blank
+    assign row_end[36] = 8'd4;
+    assign row_start[37] = 8'd1; // ROW 8: 1 blank, 3 full, 6 blank
+    assign row_end[37] = 8'd3;
+    assign row_start[38] = 8'd0; // ROW 9: 3 full, 7 blank
+    assign row_end[38] = 8'd2;
+    assign row_start[39] = 8'd0; // ROW 10: 2 full, 8 blank
+    assign row_end[39] = 8'd1;
+	 // X symbol [2 Parts]: Right side
+	 assign row_start[40] = 8'd8; // ROW 1: 8 blank, 2 full
+    assign row_end[40] = 8'd9;
+    assign row_start[41] = 8'd7; // ROW 2: 7 blank, 3 full
+    assign row_end[41] = 8'd9; 
+    assign row_start[42] = 8'd6; // ROW 3: 6 blank, 3 full, 1 blank
+    assign row_end[42] = 8'd8;
+    assign row_start[43] = 8'd5; // ROW 4: 5 blank, 3 full, 2 blank
+    assign row_end[43] = 8'd7;
+    assign row_start[44] = 8'd5; // ROW 5: 5 blank, 2 full, 3 blank
+    assign row_end[44] = 8'd6;
+    assign row_start[45] = 8'd5; // ROW 6: 5 blank, 2 full, 3 blank
+    assign row_end[45] = 8'd6;
+    assign row_start[46] = 8'd5; // ROW 7: 5 blank, 3 full, 2 blank
+    assign row_end[46] = 8'd7;
+    assign row_start[47] = 8'd6; // ROW 8: 6 blank, 3 full, 1 blank
+    assign row_end[47] = 8'd8;
+    assign row_start[48] = 8'd7; // ROW 9: 7 blank, 3 full
+    assign row_end[48] = 8'd9;
+    assign row_start[49] = 8'd8; // ROW 10: 8 blank, 2 full 
+    assign row_end[49] = 8'd9;
 	 
-	 vga_adapter VGA(
+	 fake_VGA_adapter VGA(
 	 // Input
 	 .resetn(resetn),
 	 .clock(CLOCK_50),
@@ -295,8 +347,7 @@ VGA_B
 	 .main_send_y(y),
 	 .send_curr_shape_id(curr_shape_id),
 	 .reset(reset),
-    .draw_start(draw_start),
-	 .send_attempts(out_attempts)
+    .draw_start(draw_start)
     );
 	 
 	 clear_screen Black_screen(
@@ -1027,19 +1078,4 @@ VGA_B
 	 .send_bottom_left_corner_x_pos(send_bottom_left_corner_x_pos[16]),
 	 .send_bottom_left_corner_y_pos(send_bottom_left_corner_y_pos[16])
     );
-	 
-	 hex_decoder h0(
-	 // Input
-	 .hex_digit(out_attempts[3:0]),
-	 // Output
-	 .segments(HEX0)
-	 );
-	 
-	 hex_decoder h1(
-	 // Input
-	 .hex_digit(out_attempts[7:4]),
-	 // Output
-	 .segments(HEX1)
-	 );
-	 
 endmodule
