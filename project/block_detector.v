@@ -85,8 +85,10 @@ square_bottom_left_corner_y_pos
 		 end
 		 for (i = 0; i < 5; i = i + 1)
 		 begin
-			 if (((block_bottom_left_corner_x_pos[i] - move) >= main_square_bottom_left_corner_x_pos) &&
-				  ((block_bottom_left_corner_x_pos[i] - move) <= (main_square_bottom_left_corner_x_pos + 8'd9)) &&
+			 if ((((block_bottom_left_corner_x_pos[i] - move) >= main_square_bottom_left_corner_x_pos) &&
+				  ((block_bottom_left_corner_x_pos[i] - move) <= (main_square_bottom_left_corner_x_pos + 8'd9))) ||
+				  (((block_bottom_left_corner_x_pos[i] - move) >= main_square_bottom_left_corner_x_pos - 8'd9) &&
+				  ((block_bottom_left_corner_x_pos[i] - move) <= (main_square_bottom_left_corner_x_pos))) &&
 				    !modify_square_pos_up)
 				  begin
 				  if (block_bottom_left_corner_y_pos[i] == main_square_bottom_left_corner_y_pos)
@@ -97,4 +99,4 @@ square_bottom_left_corner_y_pos
 	end
 
 	
-endmodule
+endmodule 

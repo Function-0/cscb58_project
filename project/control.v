@@ -55,7 +55,7 @@ send_attempts
    reg update_screen = 1'd0;
 	reg [10:0] curr_shape_id = 8'd17;
 	reg [10:0] curr_shape_id_for_square = 8'd0;
-	reg [10:0] square_frame_delay_counter = 11'd0;
+	reg [10:0] square_frame_delay_counter = 1'd0;
 	reg [7:0] load_attempts;
 	
    initial send_update_screen	= update_screen; 
@@ -164,14 +164,13 @@ send_attempts
 		 begin
 			 if (game_previous_state)
 			 begin
-				 // adds 1 to the attempt
-				 if (load_attempts[3:0] == 9)
+				if (load_attempts[3:0] == 4'd9)
 					begin
-						load_attempts[3:0] <= 0;
-						load_attempts[7:4] <= load_attempts[7:4] + 1;
+						load_attempts[3:0] <= 4'd0;
+						load_attempts[7:4] <= load_attempts[7:4] + 1'd1;
 					end
 				 else 
-					load_attempts[3:0] <= load_attempts + 1;
+					load_attempts[3:0] <= load_attempts + 1'd1;
 				 // Clear the screen
 				 curr_shape_id <= shape[17]; // Black_screen
 				 draw_start[17] <= 1'd1;
@@ -230,12 +229,14 @@ send_attempts
 						draw_square_frame <= 1'd0; 
 						curr_shape_id <= shape[7]; // Block_1
 						// Move to next square frame
-						if (!((square_rame_delay_counter >= 4) && (square_frame_delay_counter <= 9)))
-							curr_shape_id_for_square <= curr_shape_id_for_square + 1'd1;
+						if (!((square_frame_delay_counter >= 4) &&
+							 (square_frame_delay_counter <= 9)))
+							 curr_shape_id_for_square <= curr_shape_id_for_square + 1'd1;
 						if (curr_shape_id_for_square == shape[6]) // Square_frame_7 [IDLE]
 						begin
 							 is_jump_button_pressed <= 1'd0;
 							 curr_shape_id_for_square <= 1'd0;
+							 square_frame_delay_counter = 1'd0;
 						end
 						square_frame_delay_counter = square_frame_delay_counter + 1'd1;
 				  end
