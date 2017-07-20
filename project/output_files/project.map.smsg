@@ -1,2 +1,4 @@
-Warning (10268): Verilog HDL information at project.v(1636): always construct contains both blocking and non-blocking assignments File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1636
-Warning (10268): Verilog HDL information at project.v(1795): always construct contains both blocking and non-blocking assignments File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1795
+Warning (10268): Verilog HDL information at shape.v(112): always construct contains both blocking and non-blocking assignments File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/shape.v Line: 112
+Warning (10268): Verilog HDL information at block_detector.v(59): always construct contains both blocking and non-blocking assignments File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/block_detector.v Line: 59
+Warning (10268): Verilog HDL information at project.v(1660): always construct contains both blocking and non-blocking assignments File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1660
+Warning (10268): Verilog HDL information at project.v(1836): always construct contains both blocking and non-blocking assignments File: C:/Users/DAVID/Documents/GitHub/cscb58_project/project/project.v Line: 1836

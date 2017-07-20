@@ -81,7 +81,7 @@ module project
     
 endmodule
 
-module datapath(clock, resetn, attempts,jump, init, playing, dead, out_level_0, out_level_1,out_height);
+module datapath(clock, resetn, counter, jump, init, playing, dead, level_0, level_1,out_height, out_colour, out_x, out_y);
 	input clock;
 	input resetn;
 	input jump;
@@ -91,36 +91,48 @@ module datapath(clock, resetn, attempts,jump, init, playing, dead, out_level_0, 
 	input [639:0] level_1;
 	
 	output reg dead;
-	output reg [639:0] out_level_0;
-	output reg [639:0] out_level_1;
 	output reg [4:0] out_height;
+	output reg [2:0] colour;
+	output reg [7:0] out_x;
+	output reg [6:0] out_y;
 	
 	
-	reg [639:0] curr_level_0;
-	reg [639:0] curr_level_1;
+	reg [159:0] curr_level_0;
+	reg [159:0] curr_level_1;
 	reg [24:0] counter; // 24,999,999 has 25 digits in binary
 	reg [4:0] height;
 	reg killed;
 	reg jump_pressed;
 	reg falling;
+	reg [7:0] x;
+	reg [6:0] y;
+	reg [3:0] x_count;
+	reg [3:0] y_count;
+	reg curr_obstacle;
+	reg [7:0] shift_count;
+	assign curr_level_0[159:0] = level_0[639:479]; // sets
+	assign curr_level_1[159:0] = level_1[639:479];
 	
-	assign level
 	always @(posedge clock) begin
+		x_count <= 0;
+		y_count <= 0;
 		if(!resetn) begin
 			
 		end
 		else begin
 			if (init)
 				begin
-					counter <= 25'b1011111010111100000111111; // 24,999,999 (placeholder value)
+					counter <= 0;
 					height <= 5'b00000;
 					killed <= 1'b0;
 					jump_pressed <= 1'b0;
 					falling <= 1'b0;
+					x <= 8'd0;
+					y <= 7'd0;
 				end
 			else if(playing)
 				// this is where we calculate the player's position and collision detection
-				if (jump == 1'b1 && jump_pressed == 1'b0) // when jump is initially pressed
+				if (jump == 1'b1 && jump_pressed == 1'b0) // when jump is initially pressed , prevents double jumping
 					begin
 						jump_pressed <= 1'b1;
 					end
@@ -134,13 +146,47 @@ module datapath(clock, resetn, attempts,jump, init, playing, dead, out_level_0, 
 							begin
 								falling <= 1'b1;
 							end
-						else if (falling == 1'b1 && height >= 5'd0) // decrement height when falling and jump pressed
+						else if (falling == 1'b1 && height > 5'd0) // decrement height when falling and jump pressed
 							begin
 								height <= height - 2;
 							end
 						else if (height == 5'd0 && falling  == 1'b1) // set jump_pressed to 0 once jump ends
 							begin
 								jump_pressed <= 1'b0;
+							end
+					end
+				// begin drawing
+				if (counter < 100) // draw the player block starting from the top left side
+					begin
+						colour <= 3'b100;
+						x <= 30 + x_count;
+						y <= 110 + height + y_count; // 110 is to draw it near the bottom of the screen
+						counter <= counter + 1;
+						if (x_count < 10) 
+							begin
+								x_count <= x_count + 1;
+							end
+						else 
+							begin
+								x_count <= 0;
+								y_count <= y_count + 1;
+							end
+					end
+				else // draw the obstacles
+					begin
+						if (counter == 100)
+							begin
+								x <= 0;
+								y <= 110; 
+								x_count <= 0;
+								y_count <= 0;
+							end
+						x <= // ;
+						curr_obstacle <= curr_level_0[159:0];
+						curr_level_0 <= curr_level_0 << 1;
+						if (curr_obstacle == 1'b1) // if the curr obstacle is a 1, then draw a triangle here (start at bottom left)
+							begin
+								
 							end
 					end
 			else if(killed)
@@ -205,9 +251,6 @@ module control(clock, resetn, killed, init, playing, dead);
 			current_state <= next_state;
 		end
 	end
-endmodule
-
-module draw();
 endmodule
 
 module clear_screen();

@@ -1,4 +1,4 @@
-module project(
+module project1(
 // Input
 CLOCK_50,
 SW,
@@ -35,11 +35,11 @@ VGA_B
     wire resetn = SW[17]; // To VGA: Active logic-0
 	 wire writeEn = 1'b1;  // To VGA: VGA adapter always ON
 	 // VGA Adapter Parameters:
-    // defparam VGA.RESOLUTION = "160x120";
-    // defparam VGA.MONOCHROME = "FALSE";
-    // defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
-    // defparam VGA.BACKGROUND_IMAGE = "black.mif";
-    // defparam VGA.BACKGROUND_IMAGE = "impossible_game_title_card.mif";
+    defparam VGA.RESOLUTION = "160x120";
+    defparam VGA.MONOCHROME = "FALSE";
+    defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
+    //defparam VGA.BACKGROUND_IMAGE = "black.mif";
+    defparam VGA.BACKGROUND_IMAGE = "impossible_game_title_card.mif";
 	 
 	 wire [25:0] counter;       // 60 FPS to Control: 0 - 833332 Positive-edged clock signals
 	 wire update_screen;        // Control to Block Detector
@@ -497,7 +497,7 @@ VGA_B
 	 
 	 // 1. vga_adapter VGA [For Actual Program]
     // 2. fake_VGA_adapter VGA [For Modelsim Compatibility]
-	 fake_VGA_adapter VGA(
+	 vga_adapter VGA(
 	 // Input
 	 .resetn(resetn),
 	 .clock(CLOCK_50),
@@ -1605,7 +1605,7 @@ load_num_columns,
 send_colour,
 send_x,
 send_y,
-draw_done,
+draw_done
 );
 
     input clock;                   // 50 MHz clock
