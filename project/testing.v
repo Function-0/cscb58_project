@@ -5,6 +5,8 @@ SW,
 KEY,
 // Output
 LEDR,
+HEX0,
+HEX1,
 VGA_CLK,
 VGA_HS,
 VGA_VS,
@@ -19,6 +21,8 @@ VGA_B
 	 input [3:0] KEY;      // KEY[3:0]
 
 	 output [17:0] LEDR;   // LEDR[17:0]
+	 output [6:0] HEX0; // HEX0
+	 output [6:0] HEX1; // HEX1 
 	 // VGA Adapter Arguments:
 	 output VGA_CLK;      
 	 output VGA_HS;     
@@ -34,16 +38,16 @@ VGA_B
     wire resetn = SW[17]; // To VGA: Active logic-0
 	 wire writeEn;         // Control to VGA
 	 // VGA Adapter Parameters:
-    // defparam VGA.RESOLUTION = "160x120";
-    // defparam VGA.MONOCHROME = "FALSE";
-    // defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
-    // defparam VGA.BACKGROUND_IMAGE = "black.mif";
-    // defparam VGA.BACKGROUND_IMAGE = "impossible_game_title_card.mif";
+    defparam VGA.RESOLUTION = "160x120";
+    defparam VGA.MONOCHROME = "FALSE";
+    defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
+    //defparam VGA.BACKGROUND_IMAGE = "black.mif";
+    defparam VGA.BACKGROUND_IMAGE = "impossible_game_title_card.mif";
 	 
 	 wire [24:0] counter;       // FPS to Control
 	 wire update_screen;        // Control to Block Detector
 	 wire [10:0] curr_shape_id; // Control to Block Detector
-	 
+	 wire [7:0] out_attempts;
 	 // Constants:
     // Colours:
     wire [2:0] black = 3'b000;       
@@ -81,15 +85,15 @@ VGA_B
 	 // Obstacles: x-positions
 	 wire [10:0] x_level [20:0];
 	 assign x_level[0] = 11'd89;   // RIGHT DISPLACEMENT: LOW   
-	 assign x_level[1] = 11'd99;   //           |
-	 assign x_level[2] = 11'd109;  //           |
-	 assign x_level[3] = 11'd119;  //           |
-	 assign x_level[4] = 11'd129;  //           |
-	 assign x_level[5] = 11'd139;  //           |
-	 assign x_level[6] = 11'd149;  //           |
-	 assign x_level[7] = 11'd159;  //           |
-	 assign x_level[8] = 11'd169;  //           |
-	 assign x_level[9] = 11'd179;  //           |
+	 assign x_level[1] = 11'd199;   //           |
+	 assign x_level[2] = 11'd209;  //           |
+	 assign x_level[3] = 11'd319;  //           |
+	 assign x_level[4] = 11'd429;  //           |
+	 assign x_level[5] = 11'd539;  //           |
+	 assign x_level[6] = 11'd649;  //           |
+	 assign x_level[7] = 11'd759;  //           |
+	 assign x_level[8] = 11'd869;  //           |
+	 assign x_level[9] = 11'd979;  //           |
 	 assign x_level[10] = 11'd189; //           |
 	 assign x_level[11] = 11'd199; //           |
 	 assign x_level[12] = 11'd209; //           |
@@ -175,7 +179,7 @@ VGA_B
     assign row_start[19] = 8'd0; // ROW 10: 10 full
     assign row_end[19] = 8'd9;
 	 
-	 fake_VGA_adapter VGA(
+	 vga_adapter VGA(
 	 // Input
 	 .resetn(resetn),
 	 .clock(CLOCK_50),
@@ -203,7 +207,7 @@ VGA_B
 	 
 	 wire [10:0] test_x;
 	 wire [10:0] test_y;
-	 wire [10:0] move_counter = 8'd5;
+	 wire [10:0] move_counter = 8'd2;
 	 
 	 block_detector main_block_detector(
 	 .clock(CLOCK_50),
@@ -285,7 +289,7 @@ VGA_B
 				 send_y[3][10:0], 
 				 send_y[2][10:0], 
 				 send_y[1][10:0], 
-				 send_y[0][10:0]}), 
+				 send_y[0][10:0]}),
 	 // Output
 	 .send_update_screen(update_screen),
 	 .enable(writeEn),
@@ -294,7 +298,8 @@ VGA_B
 	 .main_send_y(y),
 	 .send_curr_shape_id(curr_shape_id),
 	 .reset(reset),
-    .draw_start(draw_start)
+    .draw_start(draw_start),
+	 .send_attempts(out_attempts)
     );
 	 
 	 clear_screen Black_screen(
@@ -362,7 +367,7 @@ VGA_B
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
     .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd5),
+    .load_bottom_left_corner_y_pos(test_y - 8'd5),//square_bottom_left_corner_y_pos - 8'd5),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -403,7 +408,7 @@ VGA_B
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
     .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd10),
+    .load_bottom_left_corner_y_pos(test_y - 8'd10),//square_bottom_left_corner_y_pos - 8'd10),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -444,7 +449,7 @@ VGA_B
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
     .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd15),
+    .load_bottom_left_corner_y_pos(test_y - 8'd15),//square_bottom_left_corner_y_pos - 8'd15),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -485,7 +490,7 @@ VGA_B
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
     .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd10),
+    .load_bottom_left_corner_y_pos(test_y - 8'd10),//square_bottom_left_corner_y_pos - 8'd10),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -526,7 +531,7 @@ VGA_B
 	 .is_obstacle(1'd0),
     .load_colour(square_colour),
     .load_bottom_left_corner_x_pos(test_x),//square_bottom_left_corner_x_pos),
-    .load_bottom_left_corner_y_pos(test_y),//square_bottom_left_corner_y_pos - 8'd5),
+    .load_bottom_left_corner_y_pos(test_y - 8'd5),//square_bottom_left_corner_y_pos - 8'd5),
     .load_num_pixels_vertical(shape_num_pixels_vertical),
     .load_num_pixels_horizontal(shape_num_pixels_horizontal),
     .load_pixel_draw_start_pos({row_start[9][10:0], 
@@ -1008,4 +1013,20 @@ VGA_B
 	 .send_bottom_left_corner_x_pos(send_bottom_left_corner_x_pos[16]),
 	 .send_bottom_left_corner_y_pos(send_bottom_left_corner_y_pos[16])
     );
+	 
+	 
+	 hex_decoder h0(
+	 // Input
+	 .hex_digit(out_attempts[3:0]),
+	 // Output
+	 .segments(HEX0)
+	 );
+	 
+	 hex_decoder h1(
+	 // Input
+	 .hex_digit(out_attempts[7:4]),
+	 // Output
+	 .segments(HEX1)
+	 );
+	 
 endmodule

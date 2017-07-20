@@ -16,7 +16,8 @@ main_send_x,
 main_send_y,
 send_curr_shape_id,
 reset,
-draw_start
+draw_start,
+send_attempts
 );
 
 	input clock;     
@@ -36,6 +37,7 @@ draw_start
 	output reg [10:0] send_curr_shape_id;
 	output reg [17:0] reset;
 	output reg [17:0] draw_start;
+	output reg [7:0] send_attempts;
 	
 	wire [2:0] send_colour [17:0];
 	wire [10:0] send_x [17:0];
@@ -53,6 +55,8 @@ draw_start
    reg update_screen = 1'd0;
 	reg [10:0] curr_shape_id = 8'd17;
 	reg [10:0] curr_shape_id_for_square = 8'd0;
+	reg [10:0] square_frame_delay_counter = 11'd0;
+	reg [7:0] load_attempts;
 	
    initial send_update_screen	= update_screen; 
 	initial send_curr_shape_id = curr_shape_id; 
@@ -150,6 +154,7 @@ draw_start
 	begin
 	    send_update_screen <= update_screen;
 		 send_curr_shape_id <= curr_shape_id;
+		 send_attempts <= load_attempts;
 	end
 
 	// Determines which shape to draw next
@@ -159,6 +164,14 @@ draw_start
 		 begin
 			 if (game_previous_state)
 			 begin
+				 // adds 1 to the attempt
+				 if (load_attempts[3:0] == 9)
+					begin
+						load_attempts[3:0] <= 0;
+						load_attempts[7:4] <= load_attempts[7:4] + 1;
+					end
+				 else 
+					load_attempts[3:0] <= load_attempts + 1;
 				 // Clear the screen
 				 curr_shape_id <= shape[17]; // Black_screen
 				 draw_start[17] <= 1'd1;
@@ -217,12 +230,14 @@ draw_start
 						draw_square_frame <= 1'd0; 
 						curr_shape_id <= shape[7]; // Block_1
 						// Move to next square frame
-						curr_shape_id_for_square <= curr_shape_id_for_square + 1'd1;
+						if (!((square_rame_delay_counter >= 4) && (square_frame_delay_counter <= 9)))
+							curr_shape_id_for_square <= curr_shape_id_for_square + 1'd1;
 						if (curr_shape_id_for_square == shape[6]) // Square_frame_7 [IDLE]
 						begin
 							 is_jump_button_pressed <= 1'd0;
 							 curr_shape_id_for_square <= 1'd0;
 						end
+						square_frame_delay_counter = square_frame_delay_counter + 1'd1;
 				  end
 				  else if (is_jump_button_pressed)
 				  begin
