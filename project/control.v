@@ -225,7 +225,7 @@ draw_start
 						begin
 							 is_jump_button_pressed <= 1'd0;
 							 curr_shape_id_for_square <= 1'd0;
-							 square_frame_delay_counter <= 1'd0;
+							 square_frame_delay_counter = 1'd0;
 						end
 						square_frame_delay_counter = square_frame_delay_counter + 1'd1;
 				  end
