@@ -53,6 +53,7 @@ draw_start
    reg update_screen = 1'd0;
 	reg [10:0] curr_shape_id = 8'd17;
 	reg [10:0] curr_shape_id_for_square = 8'd0;
+	reg [10:0] square_frame_delay_counter = 1'd0;
 	
    initial send_update_screen	= update_screen; 
 	initial send_curr_shape_id = curr_shape_id; 
@@ -217,12 +218,16 @@ draw_start
 						draw_square_frame <= 1'd0; 
 						curr_shape_id <= shape[7]; // Block_1
 						// Move to next square frame
-						curr_shape_id_for_square <= curr_shape_id_for_square + 1'd1;
+						if (!((square_frame_delay_counter >= 4) &&
+							 (square_frame_delay_counter <= 9)))
+							 curr_shape_id_for_square <= curr_shape_id_for_square + 1'd1;
 						if (curr_shape_id_for_square == shape[6]) // Square_frame_7 [IDLE]
 						begin
 							 is_jump_button_pressed <= 1'd0;
 							 curr_shape_id_for_square <= 1'd0;
+							 square_frame_delay_counter <= 1'd0;
 						end
+						square_frame_delay_counter = square_frame_delay_counter + 1'd1;
 				  end
 				  else if (is_jump_button_pressed)
 				  begin

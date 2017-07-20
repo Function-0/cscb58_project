@@ -1,5 +1,6 @@
 module shape(
 // Input
+load_max_counter_value,
 load_move_counter,
 clock,
 reset,
@@ -33,6 +34,10 @@ send_bottom_left_corner_y_pos
     input [10:0] load_num_pixels_horizontal;    // X-Dimension of shape
     input [109:0] load_pixel_draw_start_pos;    // For each row of the shape
     input [109:0] load_pixel_draw_end_pos; 
+	 input [25:0] load_max_counter_value;
+	 
+	 reg [25:0] max_counter_value;
+	 initial max_counter_value = load_max_counter_value;
 	 
 	 output reg draw_done = 1'd0; 
 	 output reg [2:0] send_colour;
@@ -98,6 +103,12 @@ send_bottom_left_corner_y_pos
 			endcase
 	 end
 	 
+	 always @ (posedge clock)
+    begin
+         if (max_counter_value != 1'd0)
+      	    max_counter_value <= max_counter_value - 1'd1;
+	 end
+	 
 	 // Updates calculation
     always @ (*)
     begin
@@ -119,7 +130,7 @@ send_bottom_left_corner_y_pos
 				move = 1'd0; // DO NOT MODIFY
 				shape_out_of_bounds = 1'd0; // DO NOT MODIFY
 		  end
-        if (draw_start && !draw_done) 
+        if (draw_start && !draw_done && (max_counter_value == 1'd0)) 
             begin
             if (curr_x_pos == load_num_pixels_horizontal)
             begin
