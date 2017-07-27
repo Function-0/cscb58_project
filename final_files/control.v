@@ -335,7 +335,7 @@ score_10s_column
 				  else 
 						curr_shape_id <= shape[0]; 
 			 end
-			 else if (main_draw_done && (curr_shape_id < shape[100]))
+			 else if (main_draw_done && (curr_shape_id < shape[101]))
 				  curr_shape_id <= curr_shape_id + 1'd1;  
 		end
 	end
