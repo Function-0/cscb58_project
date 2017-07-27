@@ -253,7 +253,7 @@ score_10s_column
 	// Determines which shape to draw next
 	always @ (posedge clock)
 	begin
-	   if (!load_start_switch && is_spike_hit)
+	   if (!load_start_switch || is_spike_hit)
 		 begin
 			 if (game_previous_state)
 			 begin
