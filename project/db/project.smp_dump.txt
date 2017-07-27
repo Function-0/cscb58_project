@@ -1,7 +1,0 @@
-
-State Machine - |project|control:c0|current_state
-Name current_state.START_DYE current_state.LOAD_Y current_state.LOAD_X_WAIT current_state.LOAD_X 
-current_state.LOAD_X 0 0 0 0 
-current_state.LOAD_X_WAIT 0 0 1 1 
-current_state.LOAD_Y 0 1 0 1 
-current_state.START_DYE 1 0 0 1 

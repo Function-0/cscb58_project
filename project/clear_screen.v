@@ -31,21 +31,18 @@ send_y
     reg [10:0] curr_y_pos = 1'd0;             
     reg [10:0] num_rows_done = 1'd0;          
 	 
-	 initial send_x = top_left_corner_x_pos + curr_x_pos;
-	 initial send_y = top_left_corner_y_pos + curr_y_pos;
-	 
 	 // Determines colour to be sent
 	 always@(*)
 	 begin
 			case (load_colour)
-			3'b000: send_colour = 3'b000;  // 3'b000 = Black
-			3'b001: send_colour = 3'b001;  // 3'b001 = Dark Blue
-			3'b010: send_colour = 3'b010;  // 3'b010 = Light Green
-			3'b011: send_colour = 3'b011;  // 3'b011 = Light Blue
-			3'b100: send_colour = 3'b100;  // 3'b100 = Red
-			3'b101: send_colour = 3'b101;  // 3'b101 = Pink
-			3'b110: send_colour = 3'b110;  // 3'b110 = Yellow
-		   3'b111: send_colour = 3'b111;  // 3'b111 = White
+			3'b000: send_colour = 3'b000;  // Black
+			3'b001: send_colour = 3'b001;  // Dark Blue
+			3'b010: send_colour = 3'b010;  // Light Green
+			3'b011: send_colour = 3'b011;  // Light Blue
+			3'b100: send_colour = 3'b100;  // Red
+			3'b101: send_colour = 3'b101;  // Pink
+			3'b110: send_colour = 3'b110;  // Yellow
+		   3'b111: send_colour = 3'b111;  // White
 			endcase
 	 end
     
