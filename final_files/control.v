@@ -76,7 +76,7 @@ score_10s_column
    reg update_screen = 1'd0;
 	reg [10:0] curr_shape_id = 8'd0;
 	reg [10:0] curr_shape_id_for_square = 8'd100;
-	reg [10:0] square_frame_delay_counter = 1'd0;
+	reg [10:0] square_frame_delay_counter = 8'd100;
 	
 	output reg send_is_jump_button_pressed;
 	
@@ -253,7 +253,7 @@ score_10s_column
 	// Determines which shape to draw next
 	always @ (posedge clock)
 	begin
-	   if (!load_start_switch || is_spike_hit)
+	   if (!load_start_switch)
 		 begin
 			 if (game_previous_state)
 			 begin
@@ -292,20 +292,20 @@ score_10s_column
 		if (game_previous_state)
 		begin
 		   // Leave shape[16] always on until screen is updated
-			if (curr_shape_id == shape[101])
-			    draw_start[101] <= draw_start_on;
+			if (curr_shape_id == shape[100])
+			    draw_start[100] <= draw_start_on;
 			else if ((draw_start[curr_shape_id] == main_draw_done) && main_draw_done)
 				 draw_start[curr_shape_id] <= draw_start_off;
 			else
 				 draw_start[curr_shape_id] <= draw_start_on;
 	   end
-		if (load_start_switch && !is_spike_hit)
+		if (load_start_switch)
 		begin
 			 if (!load_jump_button)
 				  is_jump_button_pressed <= 1'd1;
 			 if (update_screen)
 			 begin
-				draw_start[101] <= draw_start_off;
+				draw_start[100] <= draw_start_off;
 				curr_shape_id <= shape[110]; // Black_screen
 			 end
 			 if (main_draw_done && 
@@ -316,14 +316,14 @@ score_10s_column
 						draw_square_frame <= 1'd0; 
 						curr_shape_id <= shape[0]; // Block_1
 						// Move to next square frame
-						if (!((square_frame_delay_counter >= 4) &&
-							 (square_frame_delay_counter <= 40)))
+						if (!((square_frame_delay_counter >= 103) &&
+							 (square_frame_delay_counter <= 139)))
 							 curr_shape_id_for_square <= curr_shape_id_for_square + 1'd1;
 						if (curr_shape_id_for_square == shape[106]) // Square_frame_7 [IDLE]
 						begin
 							 is_jump_button_pressed <= 1'd0;
-							 curr_shape_id_for_square <= 1'd0;
-							 square_frame_delay_counter = 1'd0;
+							 curr_shape_id_for_square <= 8'd100;
+							 square_frame_delay_counter = 8'd100;
 						end
 						square_frame_delay_counter = square_frame_delay_counter + 1'd1;
 				  end
@@ -335,7 +335,7 @@ score_10s_column
 				  else 
 						curr_shape_id <= shape[0]; 
 			 end
-			 else if (main_draw_done && (curr_shape_id < shape[101]))
+			 else if (main_draw_done && (curr_shape_id < shape[100]))
 				  curr_shape_id <= curr_shape_id + 1'd1;  
 		end
 	end
