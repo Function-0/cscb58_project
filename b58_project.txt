@@ -31,7 +31,7 @@ UofT E-mail Address:
 
 Project Details
 ---------------
-Project Title: Impossible Game Remake
+Project Title: Impossible Game
 
 Project Description: We will be recreating the Impossible Game which is most commonly played on mobile devices or consoles.
                      This game involves a fast moving square that jumps given the user input and the main goal is to avoid
