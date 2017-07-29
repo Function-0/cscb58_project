@@ -69,8 +69,14 @@ What hardware will you need beyond the DE2 board
 Motivations
 -----------
 How does this project relate to the material covered in CSCB58?:
-  It will use a variety of concepts such as counters, finite state machines, drawing pixels on the VGA
-  display and etc.
+  It uses a variety of concepts learned in lectures/labs such as:
+  - Rate Divider(FPS Counter)
+  - VGA Adapter and Drawing Pixels onto VGA Screen
+  - Pseudo-FSM (used multiple inputs to change states of the game)
+  - Mux to decide colour and frame rate
+  - RAM (mif file)
+  - hierarchy model
+  - hex decoder/display
 Why is this project interesting/cool (for CSCB58 students, and for non CSCB58 students?):
   The Impossible Game is an incredibly addicting game on mobile devices and many students would probably enjoy
   it as much as we did when we played the mobile version.
@@ -101,13 +107,4 @@ Week 3: We managed to add an attempt counter which is outputted on the HEX displ
         We should have the overall map/level implemented by Monday and try to test it at the Makerspace on the same day.
 
 Week 4: In the end, we implemented the level for the game. But the jump and collision wasn't working properly.
-        And we were very ambititous about this project.
-
-Concepts Used In Our Project That Was Used In The Course
---------------------------------------------------------
-- Rate Divider(FPS Counter)
-- VGA Adapter and Drawing Pixels onto VGA Screen
-- Pseudo-FSM (used multiple inputs to change states of the game)
-- Mux to decide colour and frame rate
-- RAM (mif file)
-- hierarchy model
+        And we were very ambitious about this project.
